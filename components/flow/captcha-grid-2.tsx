@@ -48,17 +48,17 @@ export function CaptchaGrid2() {
 
   return (
     <div className="flex flex-col gap-3">
-      <div className="rounded-lg border border-gray-200 bg-white shadow-sm overflow-hidden">
+      <div className="rounded-lg border border-gray-200 bg-white shadow-sm overflow-hidden w-[85%] mx-auto">
         <div className="bg-[#4285f4] px-4 py-2.5">
           <h3 className="text-white font-medium text-base">Were all cars selected correctly?</h3>
           <p className="text-blue-100 text-xs mt-0.5">Verify the selection below and confirm.</p>
         </div>
 
-        <div className="grid grid-cols-3 gap-0.5 p-0.5 bg-gray-200 max-h-[45vw]">
+        <div className="grid grid-cols-3 gap-0.5 p-0.5 bg-gray-200">
           {captchaImages.map((image) => (
             <div
               key={image.id}
-              className={`relative overflow-hidden ${
+              className={`relative aspect-square overflow-hidden ${
                 image.isSelected ? "border-3 border-[#2196F3]" : ""
               }`}
             >
