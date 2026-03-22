@@ -234,17 +234,25 @@ export function StepFinal({ ctaUrl = "#" }: StepFinalProps) {
         </div>
       </header>
 
-      {/* Compact attention + timer bar */}
-      <div className="flex items-center justify-between bg-red-50 border border-red-200 rounded-xl px-3 py-2.5 animate-fade-in-up">
-        <p className="text-sm text-gray-800 font-extrabold leading-tight flex-1">
-          {"⚠️"} Watch the video to complete your withdrawal
+      {/* Attention Banner - compact */}
+      <div className="px-2 py-2 animate-fade-in-up">
+        <p className="text-base text-gray-800 text-center leading-snug font-extrabold">
+          {"⚠️"} Important: Watch the full video below to see how to complete your withdrawal.
         </p>
-        <div className="flex items-center gap-1 ml-3 flex-shrink-0">
-          <span className="text-xs">{"🚨"}</span>
-          <span className="text-sm font-bold text-red-600 tabular-nums">
-            {countdown.minutes}:{countdown.seconds.toString().padStart(2, '0')}
+      </div>
+
+      {/* Deletion warning */}
+      <div className="bg-red-50 border-2 border-red-200 rounded-xl px-4 py-3 animate-fade-in-up animation-delay-100">
+        <div className="flex items-center justify-center gap-2">
+          <span className="text-lg">{"🚨"}</span>
+          <span className="text-base font-bold text-red-600">
+            This video will be deleted in {countdown.minutes}:{countdown.seconds.toString().padStart(2, '0')}
           </span>
+          <span className="text-lg">{"🚨"}</span>
         </div>
+        <p className="text-xs text-red-500 text-center mt-1 font-medium">
+          Watch it NOW before it{"'"}s permanently removed!
+        </p>
       </div>
 
       {/* Video Player */}
