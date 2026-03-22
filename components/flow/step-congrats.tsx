@@ -61,7 +61,7 @@ export function StepCongrats() {
 
         {/* Main Card */}
         <div className="bg-gray-50 rounded-2xl border border-gray-200 p-6 text-center mb-5">
-          <div className="text-3xl mb-2">{"🎁"} Congratulations! {"🎁"}</div>
+          <div className="text-3xl font-bold text-gray-900 mb-2">{"🎁"} Congratulations! {"🎁"}</div>
 
           <p className="text-base text-gray-600 mb-4">
             {"Your balance is available for immediate withdrawal! 🎉"}

@@ -56,12 +56,12 @@ export function CaptchaGrid() {
         </div>
 
         {/* Image Grid */}
-        <div className="grid grid-cols-3 gap-0.5 p-0.5 bg-gray-200">
+        <div className="grid grid-cols-3 gap-0.5 p-0.5 bg-gray-200 max-h-[45vw]">
           {captchaImages.map((image) => (
             <div
               key={image.id}
-              className={`relative aspect-square overflow-hidden ${
-                image.isSelected ? "border-4 border-[#2196F3]" : ""
+              className={`relative overflow-hidden ${
+                image.isSelected ? "border-3 border-[#2196F3]" : ""
               }`}
             >
               <img

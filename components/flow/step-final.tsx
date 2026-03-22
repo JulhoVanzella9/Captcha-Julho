@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
-import { Volume2, ThumbsUp, MoreHorizontal, Eye, MessageCircle } from "lucide-react"
+import { Volume2, ThumbsUp, MoreHorizontal, MessageCircle } from "lucide-react"
 import { useFlow } from "./flow-context"
 import { AnimatedBalance } from "./animated-balance"
 
@@ -156,7 +156,6 @@ export function StepFinal({ ctaUrl = "#" }: StepFinalProps) {
   const [expandedComments, setExpandedComments] = useState<number[]>([])
   const [visibleCommentsCount, setVisibleCommentsCount] = useState(5)
   const [comments, setComments] = useState(allComments)
-  const [viewCount, setViewCount] = useState(2147891)
 
   // Rollback: intercept back button
   useEffect(() => {
@@ -185,17 +184,6 @@ export function StepFinal({ ctaUrl = "#" }: StepFinalProps) {
     return () => clearInterval(interval)
   }, [router])
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setViewCount(prev => prev + Math.floor(Math.random() * 3) + 1)
-    }, 5000)
-    return () => clearInterval(interval)
-  }, [])
-
-  const formatViewCount = (count: number) => {
-    if (count >= 1000000) return (count / 1000000).toFixed(1) + "M"
-    return count.toLocaleString()
-  }
 
   const toggleReplies = (commentId: number) => {
     setExpandedComments(prev =>
@@ -246,31 +234,17 @@ export function StepFinal({ ctaUrl = "#" }: StepFinalProps) {
         </div>
       </header>
 
-      {/* Attention Banner */}
-      <div className="px-2 py-5 animate-fade-in-up">
-        <p className="text-xl text-gray-800 text-center leading-snug font-extrabold">
-          {"⚠️"} Important: Watch the full video below to see how to complete your withdrawal.
+      {/* Compact attention + timer bar */}
+      <div className="flex items-center justify-between bg-red-50 border border-red-200 rounded-xl px-3 py-2.5 animate-fade-in-up">
+        <p className="text-sm text-gray-800 font-extrabold leading-tight flex-1">
+          {"⚠️"} Watch the video to complete your withdrawal
         </p>
-      </div>
-
-      {/* Video Stats */}
-      <div className="flex items-center justify-center gap-2 text-xs text-gray-500 animate-fade-in-up animation-delay-100">
-        <Eye className="h-3.5 w-3.5" />
-        <span>{formatViewCount(viewCount)} views</span>
-      </div>
-
-      {/* Deletion warning */}
-      <div className="bg-red-50 border-2 border-red-200 rounded-xl px-4 py-3 animate-fade-in-up animation-delay-100">
-        <div className="flex items-center justify-center gap-2">
-          <span className="text-lg">{"🚨"}</span>
-          <span className="text-base font-bold text-red-600">
-            This video will be deleted in {countdown.minutes}:{countdown.seconds.toString().padStart(2, '0')}
+        <div className="flex items-center gap-1 ml-3 flex-shrink-0">
+          <span className="text-xs">{"🚨"}</span>
+          <span className="text-sm font-bold text-red-600 tabular-nums">
+            {countdown.minutes}:{countdown.seconds.toString().padStart(2, '0')}
           </span>
-          <span className="text-lg">{"🚨"}</span>
         </div>
-        <p className="text-xs text-red-500 text-center mt-1 font-medium">
-          Watch it NOW before it{"'"}s permanently removed!
-        </p>
       </div>
 
       {/* Video Player */}

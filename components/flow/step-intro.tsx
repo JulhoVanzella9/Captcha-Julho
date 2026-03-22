@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect, useRef } from "react"
+import { useState, useEffect } from "react"
 import { useFlow } from "./flow-context"
 import { AnimatedBalance } from "./animated-balance"
 import { Confetti } from "./confetti"
@@ -8,11 +8,7 @@ import { Confetti } from "./confetti"
 export function StepIntro() {
   const { nextStep, balance } = useFlow()
   const [isClicked, setIsClicked] = useState(false)
-  const [phase, setPhase] = useState(0) // 0=hidden, 1=card, 2=moneybox, 3=text, 4=button, 5=stats
-  const [countdown, setCountdown] = useState({ minutes: 7, seconds: 23 })
-  const [withdrawals, setWithdrawals] = useState(18492)
-  const [accessCount, setAccessCount] = useState(2437891)
-  const [withdrawalTick, setWithdrawalTick] = useState(false)
+  const [phase, setPhase] = useState(0) // 0=hidden, 1=card, 2=moneybox, 3=text, 4=button
 
   // Staggered reveal
   useEffect(() => {
@@ -21,39 +17,8 @@ export function StepIntro() {
       setTimeout(() => setPhase(2), 600),
       setTimeout(() => setPhase(3), 1100),
       setTimeout(() => setPhase(4), 1500),
-      setTimeout(() => setPhase(5), 1900),
     ]
     return () => timers.forEach(clearTimeout)
-  }, [])
-
-  // Countdown timer
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCountdown(prev => {
-        if (prev.seconds > 0) return { ...prev, seconds: prev.seconds - 1 }
-        if (prev.minutes > 0) return { minutes: prev.minutes - 1, seconds: 59 }
-        return prev
-      })
-    }, 1000)
-    return () => clearInterval(interval)
-  }, [])
-
-  // Live withdrawals counter with tick animation
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setWithdrawals(prev => prev + Math.floor(Math.random() * 3) + 1)
-      setWithdrawalTick(true)
-      setTimeout(() => setWithdrawalTick(false), 300)
-    }, 4000)
-    return () => clearInterval(interval)
-  }, [])
-
-  // Access count
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setAccessCount(prev => prev + Math.floor(Math.random() * 5) + 1)
-    }, 3000)
-    return () => clearInterval(interval)
   }, [])
 
   const handleGetStarted = () => {
@@ -159,46 +124,6 @@ export function StepIntro() {
             "Click here and get started!"
           )}
         </button>
-      </div>
-
-      {/* Live Stats — each slides in from alternating sides */}
-      <div className={`mt-5 flex flex-col items-center gap-2.5 ${phase >= 5 ? "" : "opacity-0"}`}>
-        {/* People accessed */}
-        <div className={`flex items-center gap-2 ${phase >= 5 ? "animate-stat-left" : "opacity-0"}`}>
-          <svg className="w-4 h-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-            <path strokeLinecap="round" strokeLinejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
-          </svg>
-          <span className="text-sm text-gray-500">
-            <strong className="text-gray-700">{(accessCount / 1000000).toFixed(1)}M</strong> people have accessed this page
-          </span>
-        </div>
-
-        {/* Withdrawals today */}
-        <div className={`flex items-center gap-2 ${phase >= 5 ? "animate-stat-right" : "opacity-0"}`}
-          style={{ animationDelay: "0.15s", animationFillMode: "both" }}
-        >
-          <svg className="w-4 h-4 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-            <path strokeLinecap="round" strokeLinejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
-          </svg>
-          <span className="text-sm text-gray-500">
-            <strong className={`text-green-600 inline-block transition-transform duration-300 ${withdrawalTick ? "animate-count-tick" : ""}`}>
-              {withdrawals.toLocaleString()}
-            </strong> withdrawals made today
-          </span>
-        </div>
-
-        {/* Countdown timer */}
-        <div className={`flex items-center gap-2 ${phase >= 5 ? "animate-stat-left" : "opacity-0"}`}
-          style={{ animationDelay: "0.3s", animationFillMode: "both" }}
-        >
-          <svg className="w-4 h-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-            <path strokeLinecap="round" strokeLinejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-          </svg>
-          <span className="text-sm text-gray-500">
-            Offer expires in{" "}
-            <strong className="text-red-500">{countdown.minutes}:{countdown.seconds.toString().padStart(2, '0')}</strong>
-          </span>
-        </div>
       </div>
 
       {/* Footer */}
