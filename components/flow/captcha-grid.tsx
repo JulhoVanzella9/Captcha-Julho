@@ -21,7 +21,7 @@ const captchaImages: CaptchaImage[] = [
   { id: 5, src: "https://images.unsplash.com/photo-1571068316344-75bc76f77890?w=150&h=150&fit=crop&q=80", isSelected: true },
   { id: 6, src: "https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=150&h=150&fit=crop&q=80", isSelected: false },
   { id: 7, src: "https://images.unsplash.com/photo-1486325212027-8081e485255e?w=150&h=150&fit=crop&q=80", isSelected: false },
-  { id: 8, src: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=150&h=150&fit=crop&q=80", isSelected: true },
+  { id: 8, src: "https://images.unsplash.com/photo-1505705694340-019e0d529860?w=150&h=150&fit=crop&q=80", isSelected: true },
   { id: 9, src: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=150&h=150&fit=crop&q=80", isSelected: false },
 ]
 
