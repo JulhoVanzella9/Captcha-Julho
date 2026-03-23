@@ -117,7 +117,7 @@ export function CaptchaGrid2() {
 
       {/* Popup overlay feedback */}
       {feedback && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 animate-fade-in">
+        <div className="fixed inset-0 z-50 flex items-center justify-center animate-fade-in">
           {feedback === "correct" ? (
             <div className="popup-result popup-correct animate-popup-bounce">
               <CheckCircle className="h-8 w-8 text-green-500 animate-check-pop" />
