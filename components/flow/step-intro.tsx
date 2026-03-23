@@ -23,7 +23,7 @@ export function StepIntro() {
 
   const handleGetStarted = () => {
     setIsClicked(true)
-    setTimeout(() => nextStep(), 1000)
+    setTimeout(() => nextStep(), 300)
   }
 
   return (
