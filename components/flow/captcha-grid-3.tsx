@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react"
 import { Check, X, CheckCircle } from "lucide-react"
 import { useFlow } from "./flow-context"
+import { playCoinSound } from "./sounds"
 
 interface CaptchaImage {
   id: number
@@ -39,6 +40,7 @@ export function CaptchaGrid3() {
   }, [])
 
   const handleVerify = () => {
+    playCoinSound()
     setShowFeedback(true)
     setTimeout(() => {
       addBalance(30)
