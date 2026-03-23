@@ -75,6 +75,7 @@ export function ExitIntentModal() {
         <div className="p-5">
           {/* Lost money illustration */}
           <div className="text-center mb-4">
+            <div className="text-5xl mb-2">{"💸"}</div>
             <h3 className="text-xl font-bold text-gray-900 mb-2">
               You{"'"}ll lose your US$ {balance}.00!
             </h3>
@@ -118,7 +119,7 @@ export function ExitIntentModal() {
               btn-3d-green cursor-pointer
               transition-all duration-150"
           >
-            {"✅"} Yes, I want my US$ {balance}.00!
+            Yes, I want my US$ {balance}.00!
           </button>
 
 {/* removed decline button */}
