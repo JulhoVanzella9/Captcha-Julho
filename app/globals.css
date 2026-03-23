@@ -665,12 +665,17 @@
   animation: fade-in 0.3s ease-out forwards;
 }
 
-/* Warning blink — aggressive flash for retention */
-@keyframes warning-blink {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.3; transform: scale(1.15); }
+/* Siren — alternates white/dark-red with scale pulse */
+@keyframes siren {
+  0% { color: white; transform: scale(1); filter: drop-shadow(0 0 0 transparent); }
+  15% { color: #fca5a5; transform: scale(1.12); filter: drop-shadow(0 0 6px rgba(255,100,100,0.6)); }
+  30% { color: white; transform: scale(1); filter: drop-shadow(0 0 0 transparent); }
+  45% { color: #b91c1c; transform: scale(1.18); filter: drop-shadow(0 0 8px rgba(185,28,28,0.7)); }
+  60% { color: white; transform: scale(0.95); filter: drop-shadow(0 0 0 transparent); }
+  75% { color: #fca5a5; transform: scale(1.1); filter: drop-shadow(0 0 5px rgba(255,100,100,0.5)); }
+  100% { color: white; transform: scale(1); filter: drop-shadow(0 0 0 transparent); }
 }
 
-.animate-warning-blink {
-  animation: warning-blink 0.8s ease-in-out infinite;
+.animate-siren {
+  animation: siren 1.2s ease-in-out infinite;
 }
