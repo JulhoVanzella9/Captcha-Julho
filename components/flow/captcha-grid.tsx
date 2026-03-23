@@ -1,9 +1,11 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { Check, X, CheckCircle } from "lucide-react"
+import { Check, X, CheckCircle, XCircle } from "lucide-react"
 import { useFlow } from "./flow-context"
-import { playCoinSound } from "./sounds"
+import { playCoinSound, playErrorSound } from "./sounds"
+
+type FeedbackType = "correct" | "wrong" | null
 
 interface CaptchaImage {
   id: number
@@ -25,7 +27,7 @@ const captchaImages: CaptchaImage[] = [
 
 export function CaptchaGrid() {
   const { nextStep, addBalance } = useFlow()
-  const [showFeedback, setShowFeedback] = useState(false)
+  const [feedback, setFeedback] = useState<FeedbackType>(null)
   const [countdown, setCountdown] = useState({ minutes: 5, seconds: 34 })
 
   useEffect(() => {
@@ -39,13 +41,23 @@ export function CaptchaGrid() {
     return () => clearInterval(interval)
   }, [])
 
-  const handleVerify = () => {
+  // Captcha 1: "Correct" is the right answer
+  const handleCorrectAnswer = () => {
     playCoinSound()
-    setShowFeedback(true)
+    setFeedback("correct")
     setTimeout(() => {
       addBalance(35)
       nextStep()
     }, 1000)
+  }
+
+  const handleWrongAnswer = () => {
+    playErrorSound()
+    setFeedback("wrong")
+    setTimeout(() => {
+      addBalance(35)
+      nextStep()
+    }, 1500)
   }
 
   return (
@@ -107,10 +119,15 @@ export function CaptchaGrid() {
       </div>
 
       {/* Feedback */}
-      {showFeedback ? (
+      {feedback === "correct" ? (
         <div className="flex items-center justify-center gap-2.5 py-4 rounded-xl animate-feedback-flash">
           <CheckCircle className="h-6 w-6 text-green-500 animate-check-pop" />
           <span className="font-bold text-base text-green-600">Verified! +$35 added</span>
+        </div>
+      ) : feedback === "wrong" ? (
+        <div className="flex items-center justify-center gap-2.5 py-4 rounded-xl animate-shake-error">
+          <XCircle className="h-6 w-6 text-red-500" />
+          <span className="font-bold text-base text-red-600">Wrong! But you still earned +$35</span>
         </div>
       ) : (
         <>
@@ -120,7 +137,7 @@ export function CaptchaGrid() {
 
           <div className="flex gap-3">
             <button
-              onClick={handleVerify}
+              onClick={handleWrongAnswer}
               className="flex-1 flex items-center justify-center gap-2 rounded-xl py-3.5 px-4 text-red-600 font-bold text-base
                 btn-3d-incorrect cursor-pointer
                 transition-all duration-150"
@@ -129,7 +146,7 @@ export function CaptchaGrid() {
               Incorrect
             </button>
             <button
-              onClick={handleVerify}
+              onClick={handleCorrectAnswer}
               className="flex-1 flex items-center justify-center gap-2 rounded-xl py-3.5 px-4 text-green-600 font-bold text-base
                 btn-3d-correct cursor-pointer
                 transition-all duration-150"
