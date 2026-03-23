@@ -1,8 +1,6 @@
 "use client"
 
 import { FlowProvider, useFlow } from "./flow-context"
-import { FlowHeader } from "./flow-header"
-
 import { ExitIntentModal } from "./exit-intent-modal"
 import { StepIntro } from "./step-intro"
 import { StepVerify } from "./step-verify"
@@ -17,7 +15,11 @@ interface RewardsFlowProps {
 
 function FlowContent({ ctaUrl }: RewardsFlowProps) {
   const { currentStep } = useFlow()
-  const isCongratsOrFinal = currentStep === 5 || currentStep === 6
+
+  // Nav state: Home=1, Tasks=2-4, Rewards=5-6
+  const isHome = currentStep === 1
+  const isTasks = currentStep >= 2 && currentStep <= 4
+  const isRewards = currentStep >= 5
 
   return (
     <div className="min-h-screen bg-[#f1f3f4] flex flex-col">
@@ -30,17 +32,9 @@ function FlowContent({ ctaUrl }: RewardsFlowProps) {
           <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
         </svg>
         <span className="text-base font-medium text-[#202124]">Google Rewards</span>
-        <div className="ml-auto flex items-center gap-2">
-          <div className="w-8 h-8 rounded-full bg-[#4285f4] flex items-center justify-center">
-            <span className="text-xs font-bold text-white">U</span>
-          </div>
-        </div>
       </div>
 
       <main className="flex flex-col w-full max-w-md mx-auto px-4 py-4 flex-1">
-        {/* Only show balance header on captcha steps 2-4 */}
-        {currentStep > 1 && currentStep < 5 && <FlowHeader />}
-
         <div className="animate-page-enter" key={currentStep}>
           {currentStep === 1 && <StepIntro />}
           {currentStep === 2 && <StepVerify />}
@@ -56,30 +50,30 @@ function FlowContent({ ctaUrl }: RewardsFlowProps) {
 
       {/* Bottom nav bar */}
       <div className="bg-white border-t border-[#dadce0] px-6 py-2 flex items-center justify-around sticky bottom-0 z-40">
-        <div className="flex flex-col items-center gap-0.5">
-          <svg className="w-5 h-5 text-[#4285f4]" fill="currentColor" viewBox="0 0 24 24">
+        {/* Home */}
+        <div className={`flex flex-col items-center gap-0.5 ${!isHome ? "opacity-40" : ""}`}>
+          <svg className={`w-5 h-5 ${isHome ? "text-[#4285f4]" : "text-[#5f6368]"}`} fill={isHome ? "currentColor" : "none"} viewBox="0 0 24 24" stroke={isHome ? "none" : "currentColor"} strokeWidth={isHome ? 0 : 2}>
             <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
           </svg>
-          <span className="text-[10px] font-medium text-[#4285f4]">Home</span>
+          <span className={`text-[10px] font-medium ${isHome ? "text-[#4285f4]" : "text-[#5f6368]"}`}>Home</span>
         </div>
-        <div className="flex flex-col items-center gap-0.5">
-          <svg className="w-5 h-5 text-[#5f6368]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+
+        {/* Tasks */}
+        <div className={`flex flex-col items-center gap-0.5 ${!isTasks && currentStep > 4 ? "opacity-40" : ""}`}>
+          <svg className={`w-5 h-5 ${isTasks ? "text-[#4285f4]" : "text-[#5f6368]"}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
             <path strokeLinecap="round" strokeLinejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
           </svg>
-          <span className="text-[10px] font-medium text-[#5f6368]">Tasks</span>
+          <span className={`text-[10px] font-medium ${isTasks ? "text-[#4285f4]" : "text-[#5f6368]"}`}>Tasks</span>
+          {isTasks && <div className="w-1 h-1 rounded-full bg-[#4285f4] -mt-0.5" />}
         </div>
+
+        {/* Rewards */}
         <div className="flex flex-col items-center gap-0.5">
-          <svg className="w-5 h-5 text-[#5f6368]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+          <svg className={`w-5 h-5 ${isRewards ? "text-[#4285f4]" : "text-[#5f6368]"}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
             <path strokeLinecap="round" strokeLinejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
           </svg>
-          <span className="text-[10px] font-medium text-[#5f6368]">Rewards</span>
-        </div>
-        <div className="flex flex-col items-center gap-0.5 relative">
-          <svg className="w-5 h-5 text-[#5f6368]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-            <path strokeLinecap="round" strokeLinejoin="round" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
-          </svg>
-          <span className="text-[10px] font-medium text-[#5f6368]">Alerts</span>
-          <div className="absolute -top-0.5 -right-1 w-2 h-2 bg-[#ea4335] rounded-full" />
+          <span className={`text-[10px] font-medium ${isRewards ? "text-[#4285f4]" : "text-[#5f6368]"}`}>Rewards</span>
+          {isRewards && <div className="w-1 h-1 rounded-full bg-[#4285f4] -mt-0.5" />}
         </div>
       </div>
     </div>
