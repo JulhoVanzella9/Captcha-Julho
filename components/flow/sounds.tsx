@@ -12,24 +12,22 @@ function getCtx(): AudioContext {
   return audioCtx
 }
 
-// Cash register kaching sound from MP3
 let kachingAudio: HTMLAudioElement | null = null
 
 export function preloadCoinSound() {
+  if (typeof window === "undefined") return
   if (!kachingAudio) {
-    kachingAudio = new Audio("/kaching.mp3")
-    kachingAudio.volume = 0.5
+    kachingAudio = new Audio("/kaching.m4a")
+    kachingAudio.volume = 0.7
     kachingAudio.load()
   }
 }
 
 export function playCoinSound() {
-  try {
-    preloadCoinSound()
-    // Skip any silence at the start of the MP3
-    kachingAudio!.currentTime = 0.15
-    kachingAudio!.play()
-  } catch {}
+  if (typeof window === "undefined") return
+  preloadCoinSound()
+  kachingAudio!.currentTime = 0
+  kachingAudio!.play().catch(() => {})
 }
 
 
