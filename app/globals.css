@@ -414,39 +414,67 @@
   filter: brightness(0.98);
 }
 
-/* Captcha 3D buttons */
+/* Captcha 3D buttons - Google style with depth */
 .btn-3d-correct {
-  background: linear-gradient(180deg, #f0fdf4 0%, #dcfce7 50%, #d1fae5 100%);
+  background: linear-gradient(180deg, #ffffff 0%, #f8f9fa 100%);
   box-shadow:
-    0 4px 0 0 #86efac,
-    0 6px 10px rgba(34, 197, 94, 0.15),
-    inset 0 1px 0 rgba(255, 255, 255, 0.8);
-  border: 2px solid #86efac;
+    0 4px 0 0 #188038,
+    0 6px 10px rgba(24, 128, 56, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  border: 1.5px solid #34a853;
+  position: relative;
+  transition: transform 0.1s, box-shadow 0.1s, filter 0.1s;
+}
+
+.btn-3d-correct:hover {
+  filter: brightness(0.98);
+  background: linear-gradient(180deg, #f0fdf4 0%, #e8f5e9 100%);
 }
 
 .btn-3d-correct:active {
   transform: translateY(3px);
   box-shadow:
-    0 1px 0 0 #86efac,
-    0 2px 4px rgba(34, 197, 94, 0.1),
-    inset 0 1px 0 rgba(255, 255, 255, 0.5);
+    0 1px 0 0 #188038,
+    0 2px 4px rgba(24, 128, 56, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  filter: brightness(0.96);
 }
 
 .btn-3d-incorrect {
-  background: linear-gradient(180deg, #fef2f2 0%, #fee2e2 50%, #fecaca 100%);
+  background: linear-gradient(180deg, #ffffff 0%, #f8f9fa 100%);
   box-shadow:
-    0 4px 0 0 #fca5a5,
-    0 6px 10px rgba(239, 68, 68, 0.15),
-    inset 0 1px 0 rgba(255, 255, 255, 0.8);
-  border: 2px solid #fca5a5;
+    0 4px 0 0 #b91c1c,
+    0 6px 10px rgba(185, 28, 28, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  border: 1.5px solid #ea4335;
+  position: relative;
+  transition: transform 0.1s, box-shadow 0.1s, filter 0.1s;
+}
+
+.btn-3d-incorrect:hover {
+  filter: brightness(0.98);
+  background: linear-gradient(180deg, #fef2f2 0%, #fde8e8 100%);
 }
 
 .btn-3d-incorrect:active {
   transform: translateY(3px);
   box-shadow:
-    0 1px 0 0 #fca5a5,
-    0 2px 4px rgba(239, 68, 68, 0.1),
-    inset 0 1px 0 rgba(255, 255, 255, 0.5);
+    0 1px 0 0 #b91c1c,
+    0 2px 4px rgba(185, 28, 28, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  filter: brightness(0.96);
+}
+
+@keyframes shake-error {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-8px); }
+  40% { transform: translateX(8px); }
+  60% { transform: translateX(-6px); }
+  80% { transform: translateX(6px); }
+}
+
+.animate-shake-error {
+  animation: shake-error 0.5s ease-in-out;
 }
 
 /* Number count up scale tick */
