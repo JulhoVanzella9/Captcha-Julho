@@ -28,7 +28,7 @@ export function StepIntro() {
 
   return (
     <section className="flex flex-col">
-      <Confetti trigger={isClicked} />
+      <Confetti trigger={phase >= 1} />
 
       {/* Main Card — entrance with subtle 3D perspective */}
       <div
