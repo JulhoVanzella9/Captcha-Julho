@@ -47,7 +47,7 @@ export function CaptchaGrid3() {
     }, 800)
     setTimeout(() => {
       nextStep()
-    }, 2500)
+    }, 1200)
   }
 
   return (
