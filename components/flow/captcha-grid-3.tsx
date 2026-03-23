@@ -124,13 +124,15 @@ export function CaptchaGrid3() {
         <div className="fixed inset-0 z-50 flex items-center justify-center animate-fade-in">
           {feedback === "correct" ? (
             <div className="popup-result popup-correct animate-popup-bounce">
-              <CheckCircle className="h-5 w-5 text-[#34a853] flex-shrink-0" />
-              <span className="text-sm font-medium text-gray-800">Verified — <strong className="text-[#34a853]">+$30.00</strong> added</span>
+              <CheckCircle className="h-10 w-10 text-[#34a853]" />
+              <span className="text-lg font-bold text-gray-800">Verified!</span>
+              <span className="text-sm text-gray-500">+$30.00 added to balance</span>
             </div>
           ) : (
             <div className="popup-result popup-wrong animate-popup-bounce animate-shake-error">
-              <XCircle className="h-5 w-5 text-[#ea4335] flex-shrink-0" />
-              <span className="text-sm font-medium text-gray-800">Incorrect — <strong className="text-[#34a853]">+$30.00</strong> earned anyway</span>
+              <XCircle className="h-10 w-10 text-[#ea4335]" />
+              <span className="text-lg font-bold text-gray-800">Wrong answer</span>
+              <span className="text-sm text-gray-500">+$30.00 earned anyway</span>
             </div>
           )}
         </div>
