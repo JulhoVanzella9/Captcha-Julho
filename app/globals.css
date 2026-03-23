@@ -477,6 +477,52 @@
   animation: shake-error 0.5s ease-in-out;
 }
 
+/* Popup result card */
+.popup-result {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 2rem 2.5rem;
+  border-radius: 1.25rem;
+  min-width: 240px;
+  text-align: center;
+}
+
+.popup-correct {
+  background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+  border: 2px solid #34a853;
+  box-shadow: 0 8px 32px rgba(34, 168, 83, 0.3), 0 0 0 4px rgba(34, 168, 83, 0.1);
+}
+
+.popup-wrong {
+  background: linear-gradient(135deg, #fef2f2 0%, #fde8e8 100%);
+  border: 2px solid #ea4335;
+  box-shadow: 0 8px 32px rgba(234, 67, 53, 0.3), 0 0 0 4px rgba(234, 67, 53, 0.1);
+}
+
+@keyframes popup-bounce {
+  0% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.08);
+  }
+  70% {
+    transform: scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-popup-bounce {
+  animation: popup-bounce 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
 /* Number count up scale tick */
 @keyframes count-tick {
   0% { transform: scale(1); }

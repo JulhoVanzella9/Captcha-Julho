@@ -118,18 +118,27 @@ export function CaptchaGrid() {
         </span>
       </div>
 
-      {/* Feedback */}
-      {feedback === "correct" ? (
-        <div className="flex items-center justify-center gap-2.5 py-4 rounded-xl animate-feedback-flash">
-          <CheckCircle className="h-6 w-6 text-green-500 animate-check-pop" />
-          <span className="font-bold text-base text-green-600">Verified! +$35 added</span>
+      {/* Popup overlay feedback */}
+      {feedback && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 animate-fade-in">
+          {feedback === "correct" ? (
+            <div className="popup-result popup-correct animate-popup-bounce">
+              <CheckCircle className="h-14 w-14 text-green-500 animate-check-pop" />
+              <span className="text-2xl font-extrabold text-green-600">Correct!</span>
+              <span className="text-base text-green-700 font-semibold">+$35 added to your balance</span>
+            </div>
+          ) : (
+            <div className="popup-result popup-wrong animate-popup-bounce animate-shake-error">
+              <XCircle className="h-14 w-14 text-red-500" />
+              <span className="text-2xl font-extrabold text-red-600">Wrong!</span>
+              <span className="text-base text-red-700 font-semibold">But you still earned +$35</span>
+            </div>
+          )}
         </div>
-      ) : feedback === "wrong" ? (
-        <div className="flex items-center justify-center gap-2.5 py-4 rounded-xl animate-shake-error">
-          <XCircle className="h-6 w-6 text-red-500" />
-          <span className="font-bold text-base text-red-600">Wrong! But you still earned +$35</span>
-        </div>
-      ) : (
+      )}
+
+      {/* Buttons */}
+      {!feedback && (
         <>
           <p className="text-center text-base text-gray-700 font-medium">
             Is this captcha selection correct?
