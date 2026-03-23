@@ -2,7 +2,7 @@
 
 import { FlowProvider, useFlow } from "./flow-context"
 import { FlowHeader } from "./flow-header"
-import { ProgressDots } from "./progress-dots"
+
 import { ExitIntentModal } from "./exit-intent-modal"
 import { StepIntro } from "./step-intro"
 import { StepVerify } from "./step-verify"
@@ -24,11 +24,7 @@ function FlowContent({ ctaUrl }: RewardsFlowProps) {
       {/* Only show header on captcha steps 2-4 */}
       {currentStep > 1 && currentStep < 5 && <FlowHeader />}
 
-      {currentStep > 1 && currentStep < 5 && (
-        <div className="mb-2">
-          <ProgressDots />
-        </div>
-      )}
+      {/* Progress dots moved inside captcha container */}
 
       <div className="animate-page-enter" key={currentStep}>
         {currentStep === 1 && <StepIntro />}
