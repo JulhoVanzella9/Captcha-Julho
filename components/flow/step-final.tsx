@@ -225,8 +225,8 @@ export function StepFinal({ ctaUrl = "#" }: StepFinalProps) {
               <span className="text-sm font-medium text-gray-500">Rewards</span>
             </div>
           </div>
-          <div className="flex flex-col items-center border-2 border-dashed border-green-400 rounded-lg px-3 py-1.5">
-            <span className="text-[9px] uppercase tracking-wider text-gray-500 font-semibold leading-tight">Your Current Balance:</span>
+          <div className="flex items-center border-2 border-dashed border-green-400 rounded-lg px-3 py-2">
+            <span className="text-[10px] uppercase tracking-wider text-gray-500 font-semibold mr-2 leading-tight">Your Current<br/>Balance:</span>
             <div className="flex items-baseline">
               <span className="text-2xl font-bold text-green-600 mr-1">US$</span>
               <AnimatedBalance value={balance} className="text-2xl font-bold text-green-600 tabular-nums" />
