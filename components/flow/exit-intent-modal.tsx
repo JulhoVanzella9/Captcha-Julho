@@ -65,11 +65,14 @@ export function ExitIntentModal() {
     <div className="fixed inset-0 z-[99999] flex items-center justify-center bg-black/70 px-5 animate-fade-in">
       <div className="bg-white rounded-2xl w-full max-w-sm shadow-2xl overflow-hidden animate-slide-up-smooth">
         {/* Red warning top bar */}
-        <div className="bg-red-500 px-5 py-4 flex items-center justify-center gap-2">
-          <svg className="h-6 w-6 text-white animate-pulse" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-            <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
+        <div className="bg-red-500 px-5 py-4 flex items-center justify-center gap-3">
+          <svg className="h-8 w-8 text-yellow-300 animate-warning-blink flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/>
           </svg>
-          <span className="text-white font-bold text-base">Wait! Don{"'"}t leave yet!</span>
+          <span className="text-white font-bold text-lg">Wait! Don{"'"}t leave yet!</span>
+          <svg className="h-8 w-8 text-yellow-300 animate-warning-blink flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/>
+          </svg>
         </div>
 
         <div className="p-5">

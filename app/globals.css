@@ -664,3 +664,13 @@
 .animate-fade-in {
   animation: fade-in 0.3s ease-out forwards;
 }
+
+/* Warning blink — aggressive flash for retention */
+@keyframes warning-blink {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.3; transform: scale(1.15); }
+}
+
+.animate-warning-blink {
+  animation: warning-blink 0.8s ease-in-out infinite;
+}
