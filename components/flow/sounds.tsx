@@ -26,7 +26,8 @@ export function preloadCoinSound() {
 export function playCoinSound() {
   try {
     preloadCoinSound()
-    kachingAudio!.currentTime = 0
+    // Skip any silence at the start of the MP3
+    kachingAudio!.currentTime = 0.15
     kachingAudio!.play()
   } catch {}
 }
