@@ -416,7 +416,7 @@
 
 /* Captcha 3D buttons - Google style with depth */
 .btn-3d-correct {
-  background: linear-gradient(180deg, #ffffff 0%, #f8f9fa 100%);
+  background: linear-gradient(180deg, #f0fdf4 0%, #e4f9ea 100%);
   box-shadow:
     0 4px 0 0 #188038,
     0 6px 10px rgba(24, 128, 56, 0.2),
@@ -441,7 +441,7 @@
 }
 
 .btn-3d-incorrect {
-  background: linear-gradient(180deg, #ffffff 0%, #f8f9fa 100%);
+  background: linear-gradient(180deg, #fef2f2 0%, #fde8e8 100%);
   box-shadow:
     0 4px 0 0 #b91c1c,
     0 6px 10px rgba(185, 28, 28, 0.2),
