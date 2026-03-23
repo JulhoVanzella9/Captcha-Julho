@@ -124,12 +124,14 @@
     overflow-x: hidden;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply text-foreground;
+    background: #f1f3f4;
     min-height: 100%;
     min-height: 100dvh;
     overflow-x: hidden;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
+    -webkit-tap-highlight-color: transparent;
   }
 }
 

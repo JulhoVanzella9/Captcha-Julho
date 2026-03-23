@@ -86,13 +86,13 @@ export function ExitIntentModal() {
           </div>
 
           {/* Progress reminder */}
-          <div className="bg-green-50 border border-green-200 rounded-xl p-3 mb-4">
+          <div className="bg-[#e8f0fe] border border-[#d2e3fc] rounded-xl p-3 mb-4">
             <div className="flex items-center justify-between mb-2">
-              <span className="text-xs font-semibold text-gray-600 uppercase tracking-wide">Your Progress</span>
-              <span className="text-xs font-bold text-green-600">Almost done!</span>
+              <span className="text-xs font-semibold text-[#5f6368] uppercase tracking-wide">Your Progress</span>
+              <span className="text-xs font-bold text-[#1a73e8]">Almost done!</span>
             </div>
-            <div className="w-full bg-green-200 rounded-full h-2.5">
-              <div className="bg-green-500 h-2.5 rounded-full" style={{ width: "85%" }} />
+            <div className="w-full bg-[#d2e3fc] rounded-full h-2.5">
+              <div className="bg-[#4285f4] h-2.5 rounded-full" style={{ width: "85%" }} />
             </div>
           </div>
 
