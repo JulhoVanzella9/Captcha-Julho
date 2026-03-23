@@ -50,7 +50,7 @@ export function CaptchaGrid() {
 
   return (
     <div className="flex flex-col gap-3">
-      <div className="rounded-lg border border-gray-200 bg-white shadow-sm overflow-hidden w-[85%] mx-auto">
+      <div className="rounded-lg border border-gray-200 bg-white shadow-sm overflow-hidden w-[70%] mx-auto">
         {/* Header - asks to verify, not select */}
         <div className="bg-[#4285f4] px-4 py-2.5">
           <h3 className="text-white font-medium text-base">Were all bicycles selected correctly?</h3>
