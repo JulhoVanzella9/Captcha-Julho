@@ -52,7 +52,7 @@ export function CaptchaGrid3() {
 
   return (
     <div className="flex flex-col gap-3">
-      <div className="rounded-lg border border-gray-200 bg-white shadow-sm overflow-hidden w-[70%] mx-auto">
+      <div className="rounded-lg border border-gray-200 bg-white shadow-sm overflow-hidden w-[85%] mx-auto">
         <div className="bg-[#4285f4] px-4 py-2.5">
           <h3 className="text-white font-medium text-base">Were all crosswalks selected correctly?</h3>
           <p className="text-blue-100 text-xs mt-0.5">Verify the selection below and confirm.</p>
