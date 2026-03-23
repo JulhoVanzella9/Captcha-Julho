@@ -114,7 +114,7 @@ export function StepIntro() {
             disabled:opacity-70 disabled:cursor-not-allowed
             ${!isClicked ? "animate-btn-breathe" : ""}
           `}
-          style={isClicked ? { boxShadow: 'none', background: '#22c55e' } : undefined}
+          style={isClicked ? { boxShadow: 'none', background: '#4285f4' } : undefined}
         >
           {isClicked ? (
             <div className="flex items-center justify-center gap-2">

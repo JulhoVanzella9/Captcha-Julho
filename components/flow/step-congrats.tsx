@@ -97,7 +97,7 @@ export function StepCongrats() {
             transition-all duration-150
             disabled:opacity-70 disabled:cursor-not-allowed
             ${!isLoading ? "animate-btn-breathe" : ""}`}
-          style={isLoading ? { boxShadow: 'none', background: '#22c55e' } : undefined}
+          style={isLoading ? { boxShadow: 'none', background: '#4285f4' } : undefined}
         >
           {isLoading ? (
             <div className="flex items-center justify-center gap-2">

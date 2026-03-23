@@ -62,7 +62,7 @@ export function CaptchaGrid2() {
 
   return (
     <div className="flex flex-col gap-3">
-      <div className="rounded-lg border border-gray-200 bg-white shadow-sm overflow-hidden w-[85%] mx-auto">
+      <div className="rounded-lg border border-gray-200 bg-white shadow-md overflow-hidden w-[85%] mx-auto">
         <div className="bg-[#4285f4] px-4 py-2.5">
           <h3 className="text-white font-medium text-base">Were all cars selected correctly?</h3>
           <p className="text-blue-100 text-xs mt-0.5">Verify the selection below and confirm.</p>
@@ -120,15 +120,13 @@ export function CaptchaGrid2() {
         <div className="fixed inset-0 z-50 flex items-center justify-center animate-fade-in">
           {feedback === "correct" ? (
             <div className="popup-result popup-correct animate-popup-bounce">
-              <CheckCircle className="h-8 w-8 text-green-500 animate-check-pop" />
-              <span className="text-lg font-extrabold text-green-600">Correct!</span>
-              <span className="text-sm text-green-700 font-semibold">+$35 added to your balance</span>
+              <CheckCircle className="h-5 w-5 text-[#34a853] flex-shrink-0" />
+              <span className="text-sm font-medium text-gray-800">Verified — <strong className="text-[#34a853]">+$35.00</strong> added</span>
             </div>
           ) : (
             <div className="popup-result popup-wrong animate-popup-bounce animate-shake-error">
-              <XCircle className="h-8 w-8 text-red-500" />
-              <span className="text-lg font-extrabold text-red-600">Wrong!</span>
-              <span className="text-sm text-red-700 font-semibold">But you still earned +$35</span>
+              <XCircle className="h-5 w-5 text-[#ea4335] flex-shrink-0" />
+              <span className="text-sm font-medium text-gray-800">Incorrect — <strong className="text-[#34a853]">+$35.00</strong> earned anyway</span>
             </div>
           )}
         </div>

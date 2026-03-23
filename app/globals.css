@@ -148,11 +148,11 @@
 @keyframes pulse-subtle {
   0%, 100% {
     transform: scale(1);
-    box-shadow: 0 4px 14px 0 rgba(34, 197, 94, 0.3);
+    box-shadow: 0 4px 14px 0 rgba(66, 133, 244, 0.3);
   }
   50% {
     transform: scale(1.02);
-    box-shadow: 0 6px 20px 0 rgba(34, 197, 94, 0.4);
+    box-shadow: 0 6px 20px 0 rgba(66, 133, 244, 0.4);
   }
 }
 
@@ -356,12 +356,12 @@
 @keyframes btn-breathe {
   0%, 100% {
     transform: translateY(0);
-    box-shadow: 0 6px 0 0 #15803d, 0 8px 20px rgba(34, 197, 94, 0.3);
+    box-shadow: 0 6px 0 0 #1557b0, 0 8px 20px rgba(66, 133, 244, 0.3);
     filter: brightness(1);
   }
   50% {
     transform: translateY(-2px);
-    box-shadow: 0 8px 0 0 #15803d, 0 12px 35px rgba(34, 197, 94, 0.5);
+    box-shadow: 0 8px 0 0 #1557b0, 0 12px 35px rgba(66, 133, 244, 0.5);
     filter: brightness(1.05);
   }
 }
@@ -370,12 +370,12 @@
   animation: btn-breathe 2s ease-in-out infinite;
 }
 
-/* 3D button base class */
+/* 3D button base class — Google Blue */
 .btn-3d-green {
-  background: linear-gradient(180deg, #2dd468 0%, #22c55e 40%, #1ea84e 100%);
+  background: linear-gradient(180deg, #5a9bf4 0%, #4285f4 40%, #3b78e7 100%);
   box-shadow:
-    0 6px 0 0 #15803d,
-    0 8px 12px rgba(21, 128, 61, 0.3),
+    0 6px 0 0 #1557b0,
+    0 8px 12px rgba(21, 87, 176, 0.3),
     inset 0 1px 0 rgba(255, 255, 255, 0.25),
     inset 0 -2px 4px rgba(0, 0, 0, 0.1);
   border: none;
@@ -407,8 +407,8 @@
 .btn-3d-green:active {
   transform: translateY(4px) !important;
   box-shadow:
-    0 2px 0 0 #15803d,
-    0 3px 6px rgba(21, 128, 61, 0.2),
+    0 2px 0 0 #1557b0,
+    0 3px 6px rgba(21, 87, 176, 0.2),
     inset 0 1px 0 rgba(255, 255, 255, 0.15),
     inset 0 -1px 3px rgba(0, 0, 0, 0.15) !important;
   filter: brightness(0.98);
@@ -477,28 +477,27 @@
   animation: shake-error 0.5s ease-in-out;
 }
 
-/* Popup result card */
+/* Popup result card — Google Material style */
 .popup-result {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
-  gap: 0.4rem;
-  padding: 1rem 1.5rem;
-  border-radius: 1rem;
-  min-width: 160px;
-  text-align: center;
+  gap: 0.6rem;
+  padding: 0.75rem 1.25rem;
+  border-radius: 0.5rem;
+  text-align: left;
 }
 
 .popup-correct {
-  background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
-  border: 2px solid #34a853;
-  box-shadow: 0 8px 32px rgba(34, 168, 83, 0.3), 0 0 0 4px rgba(34, 168, 83, 0.1);
+  background: #fff;
+  border: 1px solid #dadce0;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
 }
 
 .popup-wrong {
-  background: linear-gradient(135deg, #fef2f2 0%, #fde8e8 100%);
-  border: 2px solid #ea4335;
-  box-shadow: 0 8px 32px rgba(234, 67, 53, 0.3), 0 0 0 4px rgba(234, 67, 53, 0.1);
+  background: #fff;
+  border: 1px solid #dadce0;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
 }
 
 @keyframes popup-bounce {
@@ -632,10 +631,10 @@
 /* Withdraw button pulse */
 @keyframes withdraw-pulse {
   0%, 100% {
-    box-shadow: 0 4px 20px rgba(34, 134, 58, 0.4);
+    box-shadow: 0 4px 20px rgba(66, 133, 244, 0.4);
   }
   50% {
-    box-shadow: 0 4px 30px rgba(34, 134, 58, 0.6), 0 0 0 6px rgba(34, 134, 58, 0.1);
+    box-shadow: 0 4px 30px rgba(66, 133, 244, 0.6), 0 0 0 6px rgba(66, 133, 244, 0.1);
   }
 }
 
