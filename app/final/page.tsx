@@ -142,7 +142,8 @@ export default function FinalPage() {
 
         {/* Header — rounded floating card */}
         <div
-          className="mx-3 mt-3 bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-md px-4 py-3 flex items-center justify-between"
+          className="mx-3 mt-3 bg-white rounded-2xl border border-[#dadce0] overflow-hidden px-4 py-3 flex items-center justify-between"
+          style={{ boxShadow: '0 1px 3px rgba(0,0,0,0.06)' }}
           style={{
             opacity: mounted ? 1 : 0,
             transform: mounted ? 'translateY(0)' : 'translateY(-12px)',
@@ -167,7 +168,8 @@ export default function FinalPage() {
 
         {/* Main video card */}
         <div
-          className="mx-3 mt-3 bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-sm"
+          className="mx-3 mt-3 bg-white rounded-2xl border border-[#dadce0] overflow-hidden"
+          style={{ boxShadow: '0 1px 3px rgba(0,0,0,0.06)' }}
           style={{
             opacity: mounted ? 1 : 0,
             transform: mounted ? 'translateY(0)' : 'translateY(20px)',
@@ -220,7 +222,8 @@ export default function FinalPage() {
 
         {/* Comments card */}
         <div
-          className="mx-3 mt-3 bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-sm"
+          className="mx-3 mt-3 bg-white rounded-2xl border border-[#dadce0] overflow-hidden"
+          style={{ boxShadow: '0 1px 3px rgba(0,0,0,0.06)' }}
           style={{
             opacity: mounted ? 1 : 0,
             transform: mounted ? 'translateY(0)' : 'translateY(24px)',
