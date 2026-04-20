@@ -150,7 +150,7 @@ export default function FinalPage() {
         </div>
 
         {/* Main content card */}
-        <div className="mx-3 mt-3 bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-sm">
+        <div className="mx-3 mt-3 bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-sm" style={{borderRadius: '16px'}}>
 
           {/* Attention text */}
           <div className="px-4 pt-4 pb-3 text-center">
@@ -199,7 +199,7 @@ export default function FinalPage() {
         </div>
 
         {/* Comments card */}
-        <div className="mx-3 mt-3 mb-3 bg-white rounded-2xl border border-gray-200 shadow-sm">
+        <div className="mx-3 mt-3 mb-3 bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
           {/* Header */}
           <div className="px-4 py-3 flex items-center justify-between border-b border-gray-100">
             <div className="flex items-center gap-2">
