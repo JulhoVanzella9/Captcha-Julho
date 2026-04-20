@@ -41,6 +41,7 @@ export default function Captcha3Page() {
     window.history.pushState(null, "", window.location.href)
     const handlePopState = () => {
       window.history.pushState(null, "", window.location.href)
+      localStorage.setItem("exit_return_page", "/captcha3")
       router.push("/exit")
     }
     window.addEventListener("popstate", handlePopState)

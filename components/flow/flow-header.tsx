@@ -24,7 +24,7 @@ export function FlowHeader({ balance }: FlowHeaderProps) {
       </div>
 
       {/* Balance in dashed green box */}
-      <div className="border-2 border-dashed border-[#34a853] rounded-lg px-3 py-1.5 flex items-center gap-1.5">
+      <div className="border-2 border-dashed border-[#34a853] rounded-2xl px-3 py-1.5 flex items-center gap-1.5">
         <span className="text-[10px] text-[#5f6368] font-medium uppercase leading-tight">Your Current<br/>Balance:</span>
         <span className="text-lg font-bold text-[#34a853]">US$ </span>
         <AnimatedBalance value={balance} className="text-lg font-bold text-[#34a853] tabular-nums" />

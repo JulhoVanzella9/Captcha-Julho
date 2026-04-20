@@ -22,6 +22,7 @@ export default function CongratsPage() {
     window.history.pushState(null, "", window.location.href)
     const handlePopState = () => {
       window.history.pushState(null, "", window.location.href)
+      localStorage.setItem("exit_return_page", "/congrats")
       router.push("/exit")
     }
     window.addEventListener("popstate", handlePopState)
