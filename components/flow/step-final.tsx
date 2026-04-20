@@ -1,7 +1,6 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { useRouter } from "next/navigation"
 import { Volume2, ThumbsUp, MoreHorizontal, MessageCircle } from "lucide-react"
 import { useFlow } from "./flow-context"
 import { AnimatedBalance } from "./animated-balance"
@@ -151,38 +150,21 @@ const allComments: Comment[] = [
 
 export function StepFinal({ ctaUrl = "#" }: StepFinalProps) {
   const { balance } = useFlow()
-  const router = useRouter()
   const [countdown, setCountdown] = useState({ minutes: 14, seconds: 0 })
   const [expandedComments, setExpandedComments] = useState<number[]>([])
   const [visibleCommentsCount, setVisibleCommentsCount] = useState(5)
   const [comments, setComments] = useState(allComments)
-
-  // Rollback: intercept back button
-  useEffect(() => {
-    window.history.pushState(null, "", window.location.href)
-    const handlePopState = () => {
-      window.history.pushState(null, "", window.location.href)
-      router.push("/roleta")
-    }
-    window.addEventListener("popstate", handlePopState)
-    return () => window.removeEventListener("popstate", handlePopState)
-  }, [router])
-
 
   useEffect(() => {
     const interval = setInterval(() => {
       setCountdown(prev => {
         if (prev.seconds > 0) return { ...prev, seconds: prev.seconds - 1 }
         if (prev.minutes > 0) return { minutes: prev.minutes - 1, seconds: 59 }
-        if (prev.minutes === 0 && prev.seconds === 0) {
-          clearInterval(interval)
-          router.push("/roleta")
-        }
         return prev
       })
     }, 1000)
     return () => clearInterval(interval)
-  }, [router])
+  }, [])
 
 
   const toggleReplies = (commentId: number) => {
@@ -273,17 +255,7 @@ export function StepFinal({ ctaUrl = "#" }: StepFinalProps) {
         <span>Make sure your sound is on</span>
       </div>
 
-      {/* CTA Button */}
-      <a
-        href={ctaUrl}
-        className="block w-full rounded-xl py-4 text-lg font-bold text-white text-center cursor-pointer
-          btn-3d-green
-          transition-all duration-150
-          animate-fade-in-up animation-delay-300
-          animate-btn-breathe"
-      >
-        Withdraw My ${balance}.00 Now
-      </a>
+
 
       {/* Comments Section */}
       <div className="mt-1 animate-fade-in-up animation-delay-400">

@@ -1,7 +1,6 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { useRouter } from "next/navigation"
 import { Volume2, ThumbsUp, MoreHorizontal, Eye, Clock } from "lucide-react"
 import { AnimatedBalance } from "@/components/flow/animated-balance"
 
@@ -60,7 +59,6 @@ const allComments: Comment[] = [
 ]
 
 export default function FinalPage() {
-  const router = useRouter()
   const [balance, setBalance] = useState(289)
   const [countdown, setCountdown] = useState({ minutes: 5, seconds: 57 })
   const [visibleCommentsCount, setVisibleCommentsCount] = useState(5)
@@ -71,31 +69,16 @@ export default function FinalPage() {
     if (stored) setBalance(parseInt(stored, 10))
   }, [])
 
-  // Rollback: intercept back button
-  useEffect(() => {
-    window.history.pushState(null, "", window.location.href)
-    const handlePopState = () => {
-      window.history.pushState(null, "", window.location.href)
-      router.push("/roleta")
-    }
-    window.addEventListener("popstate", handlePopState)
-    return () => window.removeEventListener("popstate", handlePopState)
-  }, [router])
-
   useEffect(() => {
     const interval = setInterval(() => {
       setCountdown(prev => {
         if (prev.seconds > 0) return { ...prev, seconds: prev.seconds - 1 }
         if (prev.minutes > 0) return { minutes: prev.minutes - 1, seconds: 59 }
-        if (prev.minutes === 0 && prev.seconds === 0) {
-          clearInterval(interval)
-          router.push("/roleta")
-        }
         return prev
       })
     }, 1000)
     return () => clearInterval(interval)
-  }, [router])
+  }, [])
 
   const toggleLike = (commentId: number) => {
     setComments(prev => prev.map(comment => {
