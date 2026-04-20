@@ -30,12 +30,22 @@ export default function Captcha3Page() {
   const router = useRouter()
   const [feedback, setFeedback] = useState<FeedbackType>(null)
   const [countdown, setCountdown] = useState({ minutes: 3, seconds: 47 })
-  const [balance, setBalance] = useState(259)
+  const [balance, setBalance] = useState(112)
 
   useEffect(() => {
     const stored = localStorage.getItem("captcha_balance")
     if (stored) setBalance(parseInt(stored, 10))
   }, [])
+
+  useEffect(() => {
+    window.history.pushState(null, "", window.location.href)
+    const handlePopState = () => {
+      window.history.pushState(null, "", window.location.href)
+      router.push("/exit")
+    }
+    window.addEventListener("popstate", handlePopState)
+    return () => window.removeEventListener("popstate", handlePopState)
+  }, [router])
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -52,7 +62,7 @@ export default function Captcha3Page() {
   const handleCorrectAnswer = () => {
     playSuccessSound()
     setFeedback("correct")
-    const newBalance = balance + 30
+    const newBalance = balance + 36
     setBalance(newBalance)
     localStorage.setItem("captcha_balance", newBalance.toString())
     setTimeout(() => {
@@ -63,7 +73,7 @@ export default function Captcha3Page() {
   const handleWrongAnswer = () => {
     playErrorSound()
     setFeedback("wrong")
-    const newBalance = balance + 30
+    const newBalance = balance + 36
     setBalance(newBalance)
     localStorage.setItem("captcha_balance", newBalance.toString())
     setTimeout(() => {

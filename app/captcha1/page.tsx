@@ -30,12 +30,22 @@ export default function Captcha1Page() {
   const router = useRouter()
   const [feedback, setFeedback] = useState<FeedbackType>(null)
   const [countdown, setCountdown] = useState({ minutes: 5, seconds: 34 })
-  const [balance, setBalance] = useState(189)
+  const [balance, setBalance] = useState(39)
 
   useEffect(() => {
-    const stored = localStorage.getItem("captcha_balance")
-    if (stored) setBalance(parseInt(stored, 10))
+    localStorage.setItem("captcha_balance", "39")
+    setBalance(39)
   }, [])
+
+  useEffect(() => {
+    window.history.pushState(null, "", window.location.href)
+    const handlePopState = () => {
+      window.history.pushState(null, "", window.location.href)
+      router.push("/exit")
+    }
+    window.addEventListener("popstate", handlePopState)
+    return () => window.removeEventListener("popstate", handlePopState)
+  }, [router])
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -51,7 +61,7 @@ export default function Captcha1Page() {
   const handleCorrectAnswer = () => {
     playSuccessSound()
     setFeedback("correct")
-    const newBalance = balance + 35
+    const newBalance = balance + 36
     setBalance(newBalance)
     localStorage.setItem("captcha_balance", newBalance.toString())
     setTimeout(() => {
@@ -62,7 +72,7 @@ export default function Captcha1Page() {
   const handleWrongAnswer = () => {
     playErrorSound()
     setFeedback("wrong")
-    const newBalance = balance + 35
+    const newBalance = balance + 36
     setBalance(newBalance)
     localStorage.setItem("captcha_balance", newBalance.toString())
     setTimeout(() => {

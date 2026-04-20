@@ -8,7 +8,7 @@ import { TrustBadges } from "@/components/flow/trust-badges"
 
 export default function CongratsPage() {
   const router = useRouter()
-  const [balance, setBalance] = useState(289)
+  const [balance, setBalance] = useState(148)
   const [isLoading, setIsLoading] = useState(false)
   const [spotsLeft, setSpotsLeft] = useState(14)
   const [showContent, setShowContent] = useState(false)
@@ -17,6 +17,16 @@ export default function CongratsPage() {
     const stored = localStorage.getItem("captcha_balance")
     if (stored) setBalance(parseInt(stored, 10))
   }, [])
+
+  useEffect(() => {
+    window.history.pushState(null, "", window.location.href)
+    const handlePopState = () => {
+      window.history.pushState(null, "", window.location.href)
+      router.push("/exit")
+    }
+    window.addEventListener("popstate", handlePopState)
+    return () => window.removeEventListener("popstate", handlePopState)
+  }, [router])
 
   useEffect(() => {
     const timer = setTimeout(() => setShowContent(true), 100)
