@@ -30,7 +30,7 @@ export default function Captcha2Page() {
   const router = useRouter()
   const [feedback, setFeedback] = useState<FeedbackType>(null)
   const [countdown, setCountdown] = useState({ minutes: 4, seconds: 12 })
-  const [balance, setBalance] = useState(75)
+  const [balance, setBalance] = useState(0)
 
   useEffect(() => {
     const stored = localStorage.getItem("captcha_balance")

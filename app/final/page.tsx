@@ -98,7 +98,7 @@ const FacebookIcon = () => (
 )
 
 export default function FinalPage() {
-  const [balance, setBalance] = useState(289)
+  const [balance, setBalance] = useState(0)
   const [countdown, setCountdown] = useState({ minutes: 7, seconds: 3 })
   const [visibleCommentsCount, setVisibleCommentsCount] = useState(5)
   const [comments, setComments] = useState(allComments)

@@ -37,6 +37,8 @@ export default function ExitPage() {
   }, [])
 
   const handleClaim = () => {
+    const newBalance = balance + bonusAmount
+    localStorage.setItem("captcha_balance", newBalance.toString())
     router.push(returnPage)
   }
 

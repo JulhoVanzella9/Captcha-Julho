@@ -8,7 +8,7 @@ import { TrustBadges } from "@/components/flow/trust-badges"
 
 export default function CongratsPage() {
   const router = useRouter()
-  const [balance, setBalance] = useState(148)
+  const [balance, setBalance] = useState(0)
   const [isLoading, setIsLoading] = useState(false)
   const [spotsLeft, setSpotsLeft] = useState(14)
   const [showContent, setShowContent] = useState(false)
