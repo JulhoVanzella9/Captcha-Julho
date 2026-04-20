@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useState, useRef } from "react"
-import { preloadCoinSound } from "./sounds"
+import { preloadCoinSound, playMoneySound } from "./sounds"
 
 interface AnimatedBalanceProps {
   value: number
@@ -16,9 +16,10 @@ export function AnimatedBalance({ value, className = "" }: AnimatedBalanceProps)
 
   useEffect(() => {
     if (value !== prevValue.current) {
+      if (value > prevValue.current) playMoneySound()
       const startValue = prevValue.current
       const endValue = value
-      const duration = 1500 // 1.5 seconds
+      const duration = 1500
       const startTime = Date.now()
 
       const animate = () => {

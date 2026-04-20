@@ -14,6 +14,29 @@ function getCtx(): AudioContext {
 
 export function preloadCoinSound() {}
 
+export function playMoneySound() {
+  if (typeof window === "undefined") return
+  try {
+    const ctx = getCtx()
+    const now = ctx.currentTime
+
+    const notes = [523, 659, 784, 1047]
+    notes.forEach((freq, i) => {
+      const osc = ctx.createOscillator()
+      const gain = ctx.createGain()
+      osc.type = "sine"
+      osc.frequency.setValueAtTime(freq, now + i * 0.07)
+      gain.gain.setValueAtTime(0.0001, now + i * 0.07)
+      gain.gain.exponentialRampToValueAtTime(0.09, now + i * 0.07 + 0.01)
+      gain.gain.exponentialRampToValueAtTime(0.001, now + i * 0.07 + 0.18)
+      osc.connect(gain)
+      gain.connect(ctx.destination)
+      osc.start(now + i * 0.07)
+      osc.stop(now + i * 0.07 + 0.2)
+    })
+  } catch {}
+}
+
 export function playSuccessSound() {
   if (typeof window === "undefined") return
   try {
