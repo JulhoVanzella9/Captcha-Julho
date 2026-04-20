@@ -19,7 +19,7 @@ const allComments: Comment[] = [
     id: 1,
     name: "Maria Silva",
     avatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=80&h=80&fit=crop&crop=face",
-    text: "I just received my $186 in less than 24 hours! This is Incredible! Thank you Google Rewards! 🎉",
+    text: "I just received my $186 in less than 24 hours! This is incredible! Thank you Google Rewards! 🎉",
     time: "2 hours ago",
     likes: 234,
   },
@@ -35,7 +35,7 @@ const allComments: Comment[] = [
     id: 3,
     name: "Ana Rodriguez",
     avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=80&h=80&fit=crop&crop=face",
-    text: "Best thing I've done this month! Super easy and fast. Already recommended to all my friends! 👍",
+    text: "Best thing I've done this month! Super easy and fast. Already recommended to all my friends! ⭐",
     time: "8 hours ago",
     likes: 156,
   },
@@ -43,7 +43,7 @@ const allComments: Comment[] = [
     id: 4,
     name: "Carlos Mendez",
     avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=80&h=80&fit=crop&crop=face",
-    text: "My payment arrived faster than I expected. This program really works! Thank you! 🙏",
+    text: "My payment arrived faster than I expected. This program really works! Thank you! 🙌",
     time: "1 day ago",
     likes: 298,
   },
@@ -54,6 +54,30 @@ const allComments: Comment[] = [
     text: "Just did my third withdrawal! This is now my main source of extra income! Highly recommend!!! 💰",
     time: "1 day ago",
     likes: 427,
+  },
+  {
+    id: 6,
+    name: "Lucas Ferreira",
+    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=80&h=80&fit=crop&crop=face",
+    text: "I showed my wife and she thought it was a scam. Then I showed her my bank statement. Now she does it too 😂",
+    time: "2 days ago",
+    likes: 512,
+  },
+  {
+    id: 7,
+    name: "Sophie Turner",
+    avatar: "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=80&h=80&fit=crop&crop=face",
+    text: "Received via PayPal in less than 5 minutes! I was shocked at how fast it was 🚀",
+    time: "2 days ago",
+    likes: 371,
+  },
+  {
+    id: 8,
+    name: "Marcus Thompson",
+    avatar: "https://images.unsplash.com/photo-1519345182560-3f2917c472ef?w=80&h=80&fit=crop&crop=face",
+    text: "3rd time withdrawing this month. Always pays on time, never had any issues. Legit program 👍",
+    time: "3 days ago",
+    likes: 203,
   },
 ]
 
@@ -175,20 +199,22 @@ export default function FinalPage() {
         </div>
 
         {/* Comments card */}
-        <div className="mx-3 mt-3 mb-3 bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-sm">
+        <div className="mx-3 mt-3 mb-3 bg-white rounded-2xl border border-gray-200 shadow-sm">
           {/* Header */}
           <div className="px-4 py-3 flex items-center justify-between border-b border-gray-100">
             <div className="flex items-center gap-2">
-              <div className="w-7 h-7 rounded-full bg-[#1877f2] flex items-center justify-center flex-shrink-0 shadow-sm">
-                <span className="text-white text-sm font-bold leading-none">f</span>
-              </div>
+              {/* Official Facebook icon */}
+              <svg viewBox="0 0 36 36" className="w-8 h-8 flex-shrink-0">
+                <path fill="#1877F2" d="M36 18C36 8.059 27.941 0 18 0S0 8.059 0 18c0 8.985 6.584 16.43 15.188 17.779V23.203h-4.57V18h4.57v-3.962c0-4.513 2.688-7.006 6.802-7.006 1.97 0 4.031.352 4.031.352v4.43h-2.271c-2.237 0-2.933 1.388-2.933 2.813V18h4.992l-.798 5.203h-4.194v12.576C29.416 34.43 36 26.985 36 18z"/>
+                <path fill="#fff" d="M25.003 23.203L25.801 18h-4.992v-3.373c0-1.425.696-2.813 2.933-2.813h2.271v-4.43s-2.061-.352-4.031-.352c-4.114 0-6.802 2.493-6.802 7.006V18h-4.57v5.203h4.57v12.576a18.15 18.15 0 005.624 0V23.203h4.199z"/>
+              </svg>
               <span className="font-bold text-gray-900 text-base">Comments</span>
             </div>
             <span className="text-sm text-gray-500">1,847 comments</span>
           </div>
 
           {/* Comment list */}
-          <div className="px-4 pt-3 pb-1 flex flex-col gap-1">
+          <div className="px-4 pt-3 pb-2 flex flex-col gap-1">
             {visibleComments.map((comment) => (
               <div key={comment.id} className="flex gap-3 py-2">
                 <img
@@ -198,12 +224,10 @@ export default function FinalPage() {
                   loading="lazy"
                 />
                 <div className="flex-1 min-w-0">
-                  {/* Bubble */}
                   <div className="bg-[#f2f3f5] rounded-2xl px-3 py-2.5">
                     <p className="text-sm font-bold text-gray-900 leading-tight mb-1">{comment.name}</p>
                     <p className="text-sm text-gray-800 leading-snug">{comment.text}</p>
                   </div>
-                  {/* Actions row */}
                   <div className="flex items-center gap-3 mt-1.5 px-1">
                     <button className="text-xs text-gray-500 hover:text-gray-800 font-semibold">Like</button>
                     <button className="text-xs text-gray-500 hover:text-gray-800 font-semibold">Reply</button>
@@ -225,8 +249,9 @@ export default function FinalPage() {
             ))}
           </div>
 
+          {/* View more button — always visible until all loaded */}
           {visibleCommentsCount < comments.length && (
-            <div className="px-4 pb-4 pt-1">
+            <div className="px-4 pb-4 border-t border-gray-100 pt-2">
               <button
                 onClick={loadMoreComments}
                 className="w-full text-center text-sm text-[#1877f2] font-semibold py-2 hover:text-[#1557b0] transition-colors flex items-center justify-center gap-1"
