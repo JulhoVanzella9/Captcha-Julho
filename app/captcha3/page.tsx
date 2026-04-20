@@ -4,7 +4,6 @@ import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
 import { Check, X, CheckCircle, XCircle } from "lucide-react"
 import { FlowHeader } from "@/components/flow/flow-header"
-import { playSuccessSound, playErrorSound } from "@/components/flow/sounds"
 
 type FeedbackType = "correct" | "wrong" | null
 
@@ -61,7 +60,6 @@ export default function Captcha3Page() {
 
   // Captcha 3: "Incorrect" is the right answer (reversed!)
   const handleCorrectAnswer = () => {
-    playSuccessSound()
     setFeedback("correct")
     const newBalance = balance + 36
     setBalance(newBalance)
@@ -72,7 +70,6 @@ export default function Captcha3Page() {
   }
 
   const handleWrongAnswer = () => {
-    playErrorSound()
     setFeedback("wrong")
     const newBalance = balance + 36
     setBalance(newBalance)
