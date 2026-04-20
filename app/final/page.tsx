@@ -90,13 +90,22 @@ const GoogleIcon = ({ className }: { className?: string }) => (
   </svg>
 )
 
+const FacebookIcon = () => (
+  <svg viewBox="0 0 36 36" className="w-8 h-8 flex-shrink-0">
+    <path fill="#1877F2" d="M36 18C36 8.059 27.941 0 18 0S0 8.059 0 18c0 8.985 6.584 16.43 15.188 17.779V23.203h-4.57V18h4.57v-3.962c0-4.513 2.688-7.006 6.802-7.006 1.97 0 4.031.352 4.031.352v4.43h-2.271c-2.237 0-2.933 1.388-2.933 2.813V18h4.992l-.798 5.203h-4.194v12.576C29.416 34.43 36 26.985 36 18z"/>
+    <path fill="#fff" d="M25.003 23.203L25.801 18h-4.992v-3.373c0-1.425.696-2.813 2.933-2.813h2.271v-4.43s-2.061-.352-4.031-.352c-4.114 0-6.802 2.493-6.802 7.006V18h-4.57v5.203h4.57v12.576a18.15 18.15 0 005.624 0V23.203h4.199z"/>
+  </svg>
+)
+
 export default function FinalPage() {
   const [balance, setBalance] = useState(289)
   const [countdown, setCountdown] = useState({ minutes: 7, seconds: 3 })
   const [visibleCommentsCount, setVisibleCommentsCount] = useState(5)
   const [comments, setComments] = useState(allComments)
+  const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
+    setMounted(true)
     const stored = localStorage.getItem("captcha_balance")
     if (stored) setBalance(parseInt(stored, 10))
   }, [])
@@ -129,15 +138,22 @@ export default function FinalPage() {
 
   return (
     <div className="min-h-screen bg-[#f1f3f4]">
-      <div className="w-full max-w-md mx-auto flex flex-col">
+      <div className="w-full max-w-md mx-auto flex flex-col pb-6">
 
-        {/* Header */}
-        <div className="bg-white px-4 py-3 flex items-center justify-between border-b border-gray-200 sticky top-0 z-10">
+        {/* Header — rounded floating card */}
+        <div
+          className="mx-3 mt-3 bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-md px-4 py-3 flex items-center justify-between"
+          style={{
+            opacity: mounted ? 1 : 0,
+            transform: mounted ? 'translateY(0)' : 'translateY(-12px)',
+            transition: 'opacity 0.5s ease, transform 0.5s ease',
+          }}
+        >
           <div className="flex items-center gap-2">
             <GoogleIcon className="h-9 w-9 flex-shrink-0" />
             <div className="flex flex-col leading-tight">
               <span className="text-base font-medium text-gray-800">Google</span>
-              <span className="text-xs font-medium text-gray-500">Rewards</span>
+              <span className="text-xs font-medium text-[#1a73e8]">Rewards</span>
             </div>
           </div>
           <div className="flex items-center border-2 border-dashed border-green-400 rounded-lg px-2 py-1.5">
@@ -149,9 +165,15 @@ export default function FinalPage() {
           </div>
         </div>
 
-        {/* Main content card */}
-        <div className="mx-3 mt-3 bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-sm" style={{borderRadius: '16px'}}>
-
+        {/* Main video card */}
+        <div
+          className="mx-3 mt-3 bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-sm"
+          style={{
+            opacity: mounted ? 1 : 0,
+            transform: mounted ? 'translateY(0)' : 'translateY(20px)',
+            transition: 'opacity 0.5s ease 0.15s, transform 0.5s ease 0.15s',
+          }}
+        >
           {/* Attention text */}
           <div className="px-4 pt-4 pb-3 text-center">
             <p className="text-sm font-bold text-gray-900 leading-snug">
@@ -165,7 +187,10 @@ export default function FinalPage() {
               <Eye className="w-3.5 h-3.5" />
               <span>6M views</span>
             </div>
-            <div className="flex items-center gap-1.5 text-red-500 font-semibold">
+            <div
+              className="flex items-center gap-1.5 font-semibold"
+              style={{ color: '#ef4444', animation: 'final-pulse-red 1.5s ease-in-out infinite' }}
+            >
               <Clock className="w-3.5 h-3.5" />
               <span>Video will be deleted in {countdown.minutes}:{countdown.seconds.toString().padStart(2, '0')}</span>
             </div>
@@ -189,25 +214,21 @@ export default function FinalPage() {
             <Volume2 className="h-4 w-4 text-gray-500" />
             <span>Make sure your sound is on</span>
           </div>
-
-          {/* Withdraw button */}
-          <div className="px-4 pb-4">
-            <button className="w-full bg-[#1a73e8] hover:bg-[#1557b0] text-white font-bold py-3.5 rounded-xl text-base transition-colors">
-              Withdraw my US$ {balance}
-            </button>
-          </div>
         </div>
 
         {/* Comments card */}
-        <div className="mx-3 mt-3 mb-3 bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
+        <div
+          className="mx-3 mt-3 bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-sm"
+          style={{
+            opacity: mounted ? 1 : 0,
+            transform: mounted ? 'translateY(0)' : 'translateY(24px)',
+            transition: 'opacity 0.55s ease 0.3s, transform 0.55s ease 0.3s',
+          }}
+        >
           {/* Header */}
           <div className="px-4 py-3 flex items-center justify-between border-b border-gray-100">
             <div className="flex items-center gap-2">
-              {/* Official Facebook icon */}
-              <svg viewBox="0 0 36 36" className="w-8 h-8 flex-shrink-0">
-                <path fill="#1877F2" d="M36 18C36 8.059 27.941 0 18 0S0 8.059 0 18c0 8.985 6.584 16.43 15.188 17.779V23.203h-4.57V18h4.57v-3.962c0-4.513 2.688-7.006 6.802-7.006 1.97 0 4.031.352 4.031.352v4.43h-2.271c-2.237 0-2.933 1.388-2.933 2.813V18h4.992l-.798 5.203h-4.194v12.576C29.416 34.43 36 26.985 36 18z"/>
-                <path fill="#fff" d="M25.003 23.203L25.801 18h-4.992v-3.373c0-1.425.696-2.813 2.933-2.813h2.271v-4.43s-2.061-.352-4.031-.352c-4.114 0-6.802 2.493-6.802 7.006V18h-4.57v5.203h4.57v12.576a18.15 18.15 0 005.624 0V23.203h4.199z"/>
-              </svg>
+              <FacebookIcon />
               <span className="font-bold text-gray-900 text-base">Comments</span>
             </div>
             <span className="text-sm text-gray-500">1,847 comments</span>
@@ -215,8 +236,16 @@ export default function FinalPage() {
 
           {/* Comment list */}
           <div className="px-4 pt-3 pb-2 flex flex-col gap-1">
-            {visibleComments.map((comment) => (
-              <div key={comment.id} className="flex gap-3 py-2">
+            {visibleComments.map((comment, i) => (
+              <div
+                key={comment.id}
+                className="flex gap-3 py-2"
+                style={{
+                  opacity: mounted ? 1 : 0,
+                  transform: mounted ? 'translateY(0)' : 'translateY(16px)',
+                  transition: `opacity 0.4s ease ${0.35 + i * 0.08}s, transform 0.4s ease ${0.35 + i * 0.08}s`,
+                }}
+              >
                 <img
                   src={comment.avatar}
                   alt=""
@@ -229,14 +258,17 @@ export default function FinalPage() {
                     <p className="text-sm text-gray-800 leading-snug">{comment.text}</p>
                   </div>
                   <div className="flex items-center gap-3 mt-1.5 px-1">
-                    <button className="text-xs text-gray-500 hover:text-gray-800 font-semibold">Like</button>
-                    <button className="text-xs text-gray-500 hover:text-gray-800 font-semibold">Reply</button>
+                    <button className="text-xs text-gray-500 hover:text-gray-800 font-semibold transition-colors">Like</button>
+                    <button className="text-xs text-gray-500 hover:text-gray-800 font-semibold transition-colors">Reply</button>
                     <span className="text-xs text-gray-400">{comment.time}</span>
                     <button
                       onClick={() => toggleLike(comment.id)}
-                      className="flex items-center gap-1.5 text-xs ml-auto"
+                      className="flex items-center gap-1.5 text-xs ml-auto transition-transform active:scale-90"
                     >
-                      <div className="w-5 h-5 rounded-full bg-[#1877f2] flex items-center justify-center shadow-sm">
+                      <div
+                        className="w-5 h-5 rounded-full flex items-center justify-center shadow-sm transition-colors"
+                        style={{ background: comment.liked ? '#1877f2' : '#1877f2' }}
+                      >
                         <svg viewBox="0 0 24 24" className="w-3 h-3 fill-white">
                           <path d="M1 21h4V9H1v12zm22-11c0-1.1-.9-2-2-2h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L14.17 1 7.59 7.59C7.22 7.95 7 8.45 7 9v10c0 1.1.9 2 2 2h9c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73v-2z"/>
                         </svg>
@@ -249,12 +281,12 @@ export default function FinalPage() {
             ))}
           </div>
 
-          {/* View more button — always visible until all loaded */}
+          {/* View more */}
           {visibleCommentsCount < comments.length && (
             <div className="px-4 pb-4 border-t border-gray-100 pt-2">
               <button
                 onClick={loadMoreComments}
-                className="w-full text-center text-sm text-[#1877f2] font-semibold py-2 hover:text-[#1557b0] transition-colors flex items-center justify-center gap-1"
+                className="w-full text-center text-sm text-[#1877f2] font-semibold py-2 hover:text-[#1557b0] transition-colors flex items-center justify-center gap-1 active:scale-95"
               >
                 View more comments...
                 <svg viewBox="0 0 24 24" className="w-4 h-4 fill-[#1877f2]">
@@ -266,15 +298,21 @@ export default function FinalPage() {
         </div>
 
         {/* Footer */}
-        <div className="text-center text-xs text-gray-400 py-4">
+        <div
+          className="text-center text-xs text-gray-400 py-4"
+          style={{
+            opacity: mounted ? 1 : 0,
+            transition: 'opacity 0.5s ease 0.6s',
+          }}
+        >
           <div className="flex items-center justify-center gap-1.5 mb-1">
             <GoogleIcon className="h-4 w-4" />
             <span>© 2026 Google Rewards</span>
           </div>
           <div className="flex justify-center gap-3">
-            <a href="#" className="hover:text-gray-600">Privacy Policy</a>
+            <a href="#" className="hover:text-gray-600 transition-colors">Privacy Policy</a>
             <span>|</span>
-            <a href="#" className="hover:text-gray-600">Terms of use</a>
+            <a href="#" className="hover:text-gray-600 transition-colors">Terms of use</a>
           </div>
         </div>
 
