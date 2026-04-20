@@ -11,14 +11,12 @@ interface AnimatedBalanceProps {
 export function AnimatedBalance({ value, className = "" }: AnimatedBalanceProps) {
   const [displayValue, setDisplayValue] = useState(value)
   const prevValue = useRef(value)
-  const isFirstAnimation = useRef(true)
 
   useEffect(() => {
     if (value !== prevValue.current) {
-      // Only play money sound on initial page-load animation (first time)
-      if (value > prevValue.current && isFirstAnimation.current) {
+      // Only play money sound when animating FROM zero (page load)
+      if (value > prevValue.current && prevValue.current === 0) {
         playMoneySound()
-        isFirstAnimation.current = false
       }
 
       const startValue = prevValue.current
