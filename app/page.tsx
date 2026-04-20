@@ -1,8 +1,5 @@
-import { RewardsFlow } from "@/components/flow/rewards-flow"
+import { redirect } from "next/navigation"
 
-// Configure your CTA destination URL here
-const CTA_URL = "https://checkout.example.com/google-rewards/claim?ref=vsl"
-
-export default function LandingPage() {
-  return <RewardsFlow ctaUrl={CTA_URL} />
+export default function Home() {
+  redirect("/captcha1")
 }

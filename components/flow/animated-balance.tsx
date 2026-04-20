@@ -12,9 +12,7 @@ export function AnimatedBalance({ value, className = "" }: AnimatedBalanceProps)
   const [displayValue, setDisplayValue] = useState(value)
   const prevValue = useRef(value)
 
-  useEffect(() => {
-    preloadCoinSound()
-  }, [])
+
 
   useEffect(() => {
     if (value !== prevValue.current) {
