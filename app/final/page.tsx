@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react"
+import { useRouter } from "next/navigation"
 import { Volume2, Eye, Clock } from "lucide-react"
 import { AnimatedBalance } from "@/components/flow/animated-balance"
 
@@ -98,6 +99,7 @@ const FacebookIcon = () => (
 )
 
 export default function FinalPage() {
+  const router = useRouter()
   const [balance, setBalance] = useState(0)
   const [countdown, setCountdown] = useState({ minutes: 7, seconds: 3 })
   const [visibleCommentsCount, setVisibleCommentsCount] = useState(5)
@@ -109,6 +111,16 @@ export default function FinalPage() {
     const stored = localStorage.getItem("captcha_balance")
     if (stored) setBalance(parseInt(stored, 10))
   }, [])
+
+  useEffect(() => {
+    window.history.pushState(null, "", window.location.href)
+    const handlePopState = () => {
+      window.history.pushState(null, "", window.location.href)
+      router.push("/roleta")
+    }
+    window.addEventListener("popstate", handlePopState)
+    return () => window.removeEventListener("popstate", handlePopState)
+  }, [router])
 
   useEffect(() => {
     const interval = setInterval(() => {

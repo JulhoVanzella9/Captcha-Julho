@@ -20,20 +20,37 @@ export function playMoneySound() {
     const ctx = getCtx()
     const now = ctx.currentTime
 
-    const notes = [523, 659, 784, 1047]
-    notes.forEach((freq, i) => {
+    // Coin-like: 3 quick metallic triangle pings with shimmer
+    const coinFreqs = [1800, 2200, 2600]
+    coinFreqs.forEach((freq, i) => {
+      const t = now + i * 0.055
       const osc = ctx.createOscillator()
       const gain = ctx.createGain()
-      osc.type = "sine"
-      osc.frequency.setValueAtTime(freq, now + i * 0.07)
-      gain.gain.setValueAtTime(0.0001, now + i * 0.07)
-      gain.gain.exponentialRampToValueAtTime(0.09, now + i * 0.07 + 0.01)
-      gain.gain.exponentialRampToValueAtTime(0.001, now + i * 0.07 + 0.18)
+      osc.type = "triangle"
+      osc.frequency.setValueAtTime(freq, t)
+      osc.frequency.exponentialRampToValueAtTime(freq * 0.85, t + 0.18)
+      gain.gain.setValueAtTime(0.0001, t)
+      gain.gain.exponentialRampToValueAtTime(0.13, t + 0.005)
+      gain.gain.exponentialRampToValueAtTime(0.001, t + 0.22)
       osc.connect(gain)
       gain.connect(ctx.destination)
-      osc.start(now + i * 0.07)
-      osc.stop(now + i * 0.07 + 0.2)
+      osc.start(t)
+      osc.stop(t + 0.24)
     })
+
+    // Short rising sweep at the end
+    const sweep = ctx.createOscillator()
+    const sweepGain = ctx.createGain()
+    sweep.type = "sine"
+    sweep.frequency.setValueAtTime(600, now + 0.17)
+    sweep.frequency.exponentialRampToValueAtTime(1200, now + 0.38)
+    sweepGain.gain.setValueAtTime(0.0001, now + 0.17)
+    sweepGain.gain.exponentialRampToValueAtTime(0.07, now + 0.19)
+    sweepGain.gain.exponentialRampToValueAtTime(0.001, now + 0.4)
+    sweep.connect(sweepGain)
+    sweepGain.connect(ctx.destination)
+    sweep.start(now + 0.17)
+    sweep.stop(now + 0.42)
   } catch {}
 }
 
