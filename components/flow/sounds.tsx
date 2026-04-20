@@ -14,8 +14,13 @@ function getCtx(): AudioContext {
 
 export function preloadCoinSound() {}
 
+let lastMoneySoundAt = 0
+
 export function playMoneySound() {
   if (typeof window === "undefined") return
+  const now = Date.now()
+  if (now - lastMoneySoundAt < 1000) return
+  lastMoneySoundAt = now
   try {
     const ctx = getCtx()
     const now = ctx.currentTime
