@@ -174,25 +174,27 @@ export default function FinalPage() {
             transition: 'opacity 0.5s ease 0.15s, transform 0.5s ease 0.15s',
           }}
         >
-          {/* Attention text */}
-          <div className="px-4 pt-4 pb-3 text-center">
-            <p className="text-sm font-bold text-gray-900 leading-snug">
+          {/* Attention text + stats */}
+          <div className="px-5 pt-4 pb-4 text-center">
+            <p className="text-sm font-bold text-gray-900 leading-snug mb-3">
               ATTENTION: Watch the video until the end to understand how to withdraw your available balance
             </p>
-          </div>
-
-          {/* Stats bar */}
-          <div className="flex items-center justify-center gap-5 px-4 py-2 bg-gray-100 text-xs text-gray-600 border-t border-b border-gray-200">
-            <div className="flex items-center gap-1.5">
-              <Eye className="w-3.5 h-3.5" />
-              <span>6M views</span>
-            </div>
-            <div
-              className="flex items-center gap-1.5 font-semibold"
-              style={{ color: '#ef4444', animation: 'final-pulse-red 1.5s ease-in-out infinite' }}
-            >
-              <Clock className="w-3.5 h-3.5" />
-              <span>Video will be deleted in {countdown.minutes}:{countdown.seconds.toString().padStart(2, '0')}</span>
+            <div className="flex items-center justify-center gap-5 text-xs border-t border-gray-100 pt-3">
+              <div className="flex items-center gap-1.5 text-gray-500">
+                <Eye className="w-3.5 h-3.5 text-[#4285f4]" />
+                <span>6M views</span>
+              </div>
+              <div className="flex items-center gap-1.5 text-gray-500">
+                <Clock className="w-3.5 h-3.5 text-red-500" />
+                <span>Video will be deleted in{" "}
+                  <strong
+                    className="text-red-500"
+                    style={{ animation: 'final-pulse-red 1.4s ease-in-out infinite' }}
+                  >
+                    {countdown.minutes}:{countdown.seconds.toString().padStart(2, '0')}
+                  </strong>
+                </span>
+              </div>
             </div>
           </div>
 
