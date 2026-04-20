@@ -12,24 +12,37 @@ function getCtx(): AudioContext {
   return audioCtx
 }
 
-let kachingAudio: HTMLAudioElement | null = null
-
-export function preloadCoinSound() {
+// Neutral success sound - a pleasant confirmation tone
+export function playSuccessSound() {
   if (typeof window === "undefined") return
-  if (!kachingAudio) {
-    kachingAudio = new Audio("/kaching.m4a")
-    kachingAudio.volume = 0.7
-    kachingAudio.load()
-  }
-}
+  try {
+    const ctx = getCtx()
+    const now = ctx.currentTime
 
-export function playCoinSound() {
-  if (typeof window === "undefined") return
-  preloadCoinSound()
-  kachingAudio!.currentTime = 0
-  kachingAudio!.play().catch(() => {})
-}
+    // Pleasant two-tone confirmation sound
+    const osc1 = ctx.createOscillator()
+    const gain1 = ctx.createGain()
+    osc1.type = "sine"
+    osc1.frequency.setValueAtTime(880, now) // A5
+    gain1.gain.setValueAtTime(0.15, now)
+    gain1.gain.exponentialRampToValueAtTime(0.001, now + 0.15)
+    osc1.connect(gain1)
+    gain1.connect(ctx.destination)
+    osc1.start(now)
+    osc1.stop(now + 0.15)
 
+    const osc2 = ctx.createOscillator()
+    const gain2 = ctx.createGain()
+    osc2.type = "sine"
+    osc2.frequency.setValueAtTime(1175, now + 0.1) // D6
+    gain2.gain.setValueAtTime(0.12, now + 0.1)
+    gain2.gain.exponentialRampToValueAtTime(0.001, now + 0.3)
+    osc2.connect(gain2)
+    gain2.connect(ctx.destination)
+    osc2.start(now + 0.1)
+    osc2.stop(now + 0.3)
+  } catch {}
+}
 
 export function playErrorSound() {
   if (typeof window === "undefined") return
@@ -153,5 +166,3 @@ export function playSpinSound() {
     thump.stop(endTime + 0.16)
   } catch {}
 }
-
-// force deploy

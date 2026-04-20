@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react"
 import { Check, X, CheckCircle, XCircle } from "lucide-react"
 import { useFlow } from "./flow-context"
-import { playCoinSound, playErrorSound } from "./sounds"
+import { playSuccessSound, playErrorSound } from "./sounds"
 
 type FeedbackType = "correct" | "wrong" | null
 
@@ -43,7 +43,7 @@ export function CaptchaGrid3() {
 
   // Captcha 3: "Incorrect" is the right answer (reversed!)
   const handleCorrectAnswer = () => {
-    playCoinSound()
+    playSuccessSound()
     setFeedback("correct")
     setTimeout(() => {
       addBalance(30)

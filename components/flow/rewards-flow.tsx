@@ -2,7 +2,7 @@
 
 import { FlowProvider, useFlow } from "./flow-context"
 import { FlowHeader } from "./flow-header"
-import { ExitIntentModal } from "./exit-intent-modal"
+
 import { StepIntro } from "./step-intro"
 import { StepVerify } from "./step-verify"
 import { StepVerify2 } from "./step-verify-2"
@@ -37,8 +37,7 @@ function FlowContent({ ctaUrl }: RewardsFlowProps) {
           {currentStep === 6 && <StepFinal ctaUrl={ctaUrl} />}
         </div>
 
-        {/* Exit intent modal - shows on steps 2-5 */}
-        {currentStep >= 2 && currentStep <= 5 && <ExitIntentModal />}
+
       </main>
 
       {/* Bottom nav bar with inline progress */}

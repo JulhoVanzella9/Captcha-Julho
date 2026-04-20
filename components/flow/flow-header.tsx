@@ -1,11 +1,12 @@
 "use client"
 
-import { useFlow } from "./flow-context"
 import { AnimatedBalance } from "./animated-balance"
 
-export function FlowHeader() {
-  const { balance } = useFlow()
+interface FlowHeaderProps {
+  balance: number
+}
 
+export function FlowHeader({ balance }: FlowHeaderProps) {
   return (
     <div className="bg-white rounded-xl border border-[#dadce0] px-4 py-3 mb-3 flex items-center justify-between shadow-[0_1px_3px_rgba(0,0,0,0.06)]">
       {/* Google logo + Rewards */}
