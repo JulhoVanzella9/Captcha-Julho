@@ -248,8 +248,8 @@ export default function FinalPage() {
         </div>
       </main>
 
-      {/* Bottom nav bar - responsive */}
-      <div className="bg-white border-t border-[#dadce0] sticky bottom-0 z-40 px-3 pt-2 pb-[max(0.5rem,env(safe-area-inset-bottom))] shadow-[0_-2px_8px_rgba(0,0,0,0.04)]">
+      {/* Bottom nav bar - Safari compatible */}
+      <nav className="bg-white border-t border-[#dadce0] fixed bottom-0 left-0 right-0 z-40 px-3 pt-2 pb-[calc(0.75rem+env(safe-area-inset-bottom,0px))] shadow-[0_-2px_8px_rgba(0,0,0,0.04)]">
         <div className="relative mx-4 mb-2">
           <div className="absolute top-[11px] left-0 right-0 h-[3px] bg-[#e8eaed] rounded-full" />
           <div className="absolute top-[11px] left-0 h-[3px] bg-[#34a853] rounded-full" style={{ width: "100%" }} />
@@ -283,7 +283,10 @@ export default function FinalPage() {
             </div>
           </div>
         </div>
-      </div>
+      </nav>
+
+      {/* Spacer for fixed bottom nav */}
+      <div className="h-20" />
     </div>
   )
 }
