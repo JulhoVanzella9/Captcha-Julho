@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState, useRef } from "react"
+import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
 import { Volume2, Eye, Clock } from "lucide-react"
 import { AnimatedBalance } from "@/components/flow/animated-balance"
@@ -16,95 +16,33 @@ interface Comment {
 }
 
 const allComments: Comment[] = [
-  {
-    id: 1,
-    name: "Maria Silva",
-    avatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=80&h=80&fit=crop&crop=face",
-    text: "I just received my $186 in less than 24 hours! This is incredible! Thank you Google Rewards!",
-    time: "2 hours ago",
-    likes: 234,
-  },
-  {
-    id: 2,
-    name: "John Smith",
-    avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=80&h=80&fit=crop&crop=face",
-    text: "At first I was skeptical, but I actually received my payment! Already made $312 this week alone!",
-    time: "5 hours ago",
-    likes: 189,
-  },
-  {
-    id: 3,
-    name: "Ana Rodriguez",
-    avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=80&h=80&fit=crop&crop=face",
-    text: "Best thing I've done this month! Super easy and fast. Already recommended to all my friends!",
-    time: "8 hours ago",
-    likes: 156,
-  },
-  {
-    id: 4,
-    name: "Carlos Mendez",
-    avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=80&h=80&fit=crop&crop=face",
-    text: "My payment arrived faster than I expected. This program really works! Thank you!",
-    time: "1 day ago",
-    likes: 298,
-  },
-  {
-    id: 5,
-    name: "Jennifer Lee",
-    avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=80&h=80&fit=crop&crop=face",
-    text: "Just did my third withdrawal! This is now my main source of extra income! Highly recommend!!!",
-    time: "1 day ago",
-    likes: 427,
-  },
+  { id: 1, name: "Maria Silva", avatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=80&h=80&fit=crop&crop=face", text: "I just received my $186 in less than 24 hours! This is incredible! Thank you Google Rewards! 🎉", time: "2 hours ago", likes: 234 },
+  { id: 2, name: "John Smith", avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=80&h=80&fit=crop&crop=face", text: "At first I was skeptical, but I actually received my payment! Already made $312 this week alone! 🍊", time: "5 hours ago", likes: 189 },
+  { id: 3, name: "Ana Rodriguez", avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=80&h=80&fit=crop&crop=face", text: "Best thing I've done this month! Super easy and fast. Already recommended to all my friends! ⭐", time: "8 hours ago", likes: 156 },
+  { id: 4, name: "Carlos Mendez", avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=80&h=80&fit=crop&crop=face", text: "My payment arrived faster than I expected. This program really works! Thank you! 🙌", time: "1 day ago", likes: 298 },
+  { id: 5, name: "Jennifer Lee", avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=80&h=80&fit=crop&crop=face", text: "Just did my third withdrawal! This is now my main source of extra income! Highly recommend!!! 🤑", time: "1 day ago", likes: 427 },
 ]
-
-const GoogleIcon = ({ className }: { className?: string }) => (
-  <svg viewBox="0 0 24 24" className={className}>
-    <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
-    <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
-    <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
-    <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
-  </svg>
-)
-
-const FacebookIcon = () => (
-  <svg viewBox="0 0 36 36" className="w-5 h-5 flex-shrink-0">
-    <path fill="#1877F2" d="M36 18C36 8.059 27.941 0 18 0S0 8.059 0 18c0 8.985 6.584 16.43 15.188 17.779V23.203h-4.57V18h4.57v-3.962c0-4.513 2.688-7.006 6.802-7.006 1.97 0 4.031.352 4.031.352v4.43h-2.271c-2.237 0-2.933 1.388-2.933 2.813V18h4.992l-.798 5.203h-4.194v12.576C29.416 34.43 36 26.985 36 18z"/>
-    <path fill="#fff" d="M25.003 23.203L25.801 18h-4.992v-3.373c0-1.425.696-2.813 2.933-2.813h2.271v-4.43s-2.061-.352-4.031-.352c-4.114 0-6.802 2.493-6.802 7.006V18h-4.57v5.203h4.57v12.576a18.15 18.15 0 005.624 0V23.203h4.199z"/>
-  </svg>
-)
 
 export default function FinalPage() {
   const router = useRouter()
   const [balance, setBalance] = useState(0)
   const [countdown, setCountdown] = useState({ minutes: 7, seconds: 3 })
-  const [visibleCommentsCount, setVisibleCommentsCount] = useState(5)
+  const [visibleCommentsCount, setVisibleCommentsCount] = useState(3)
   const [comments, setComments] = useState(allComments)
-  const [showContent, setShowContent] = useState(false)
-  const vturbContainerRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     const stored = localStorage.getItem("captcha_balance")
     if (stored) setBalance(parseInt(stored, 10))
-    
-    const timer = setTimeout(() => setShowContent(true), 100)
-    return () => clearTimeout(timer)
   }, [])
 
   // Load VTurb script
   useEffect(() => {
-    if (!showContent) return
-    
     const script = document.createElement("script")
     script.src = "https://scripts.converteai.net/7f440f16-2b3f-4e78-b9c9-09a104b2493d/players/67422dad6fbe5b000bdb1ab0/v4/player.js"
     script.async = true
     document.head.appendChild(script)
-    
-    return () => {
-      const existingScript = document.querySelector('script[src*="converteai.net"]')
-      if (existingScript) existingScript.remove()
-    }
-  }, [showContent])
+    return () => { script.remove() }
+  }, [])
 
   useEffect(() => {
     window.history.pushState(null, "", window.location.href)
@@ -137,7 +75,7 @@ export default function FinalPage() {
   }
 
   const loadMoreComments = () => {
-    setVisibleCommentsCount(prev => Math.min(prev + 5, comments.length))
+    setVisibleCommentsCount(prev => Math.min(prev + 2, comments.length))
   }
 
   const visibleComments = comments.slice(0, visibleCommentsCount)
@@ -147,35 +85,39 @@ export default function FinalPage() {
       <main className="flex flex-col w-full max-w-md mx-auto px-3 py-3 flex-1">
         <div className="animate-page-enter">
           <section className="flex flex-col gap-3">
-            
-            {/* Main Card - Unified design like congrats page */}
-            <div 
-              className={`bg-gray-50 rounded-2xl border border-gray-200 overflow-hidden shadow-[0_2px_8px_rgba(0,0,0,0.08)] transition-all duration-500 ${showContent ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}
-            >
-              {/* Header inside card */}
-              <div className="flex items-center justify-between px-3 py-2.5 border-b border-gray-200 bg-white">
+            {/* Main Card - EXACT captcha style */}
+            <div className="bg-[#f8f9fa] rounded-2xl border border-[#dadce0] p-3 flex flex-col gap-2.5 shadow-[0_1px_3px_rgba(0,0,0,0.08),0_4px_12px_rgba(0,0,0,0.04)]">
+              {/* Header with logo and balance - EXACT captcha style */}
+              <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
-                  <GoogleIcon className="h-8 w-8 flex-shrink-0" />
+                  <svg viewBox="0 0 24 24" className="h-7 w-7 flex-shrink-0">
+                    <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                    <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                    <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+                    <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+                  </svg>
                   <div className="flex flex-col leading-tight">
-                    <span className="text-base font-medium text-gray-800">Google</span>
-                    <span className="text-xs font-medium text-gray-500">Rewards</span>
+                    <span className="text-sm font-semibold text-[#202124]">Google</span>
+                    <span className="text-[10px] text-[#5f6368] -mt-0.5">Rewards</span>
                   </div>
                 </div>
-                <div className="flex items-center border-2 border-dashed border-green-400 rounded-lg px-2 py-1.5">
-                  <span className="text-[8px] uppercase tracking-wider text-gray-500 font-semibold mr-1.5 leading-tight text-right">Your Current<br/>Balance:</span>
-                  <div className="flex items-baseline">
-                    <span className="text-lg font-bold text-green-600 mr-0.5">US$</span>
-                    <AnimatedBalance value={balance} className="text-lg font-bold text-green-600 tabular-nums" />
-                  </div>
+                <div className="border-2 border-dashed border-[#34a853] rounded-xl px-2 py-1 flex items-center gap-1">
+                  <span className="text-[8px] text-[#5f6368] font-medium uppercase leading-tight">Your Current<br/>Balance:</span>
+                  <span className="text-sm font-bold text-[#34a853]">US$ </span>
+                  <AnimatedBalance value={balance} className="text-sm font-bold text-[#34a853] tabular-nums" />
                 </div>
               </div>
 
-              {/* Attention text */}
-              <div className="px-3 py-3 text-center bg-white border-b border-gray-100">
-                <p className="text-xs font-bold text-gray-900 leading-snug mb-2">
-                  ATTENTION: Watch the video until the end to understand how to withdraw your available balance
-                </p>
-                <div className="flex items-center justify-center gap-3 text-[10px]">
+              {/* Video content box - similar to captcha image grid box */}
+              <div className="rounded-lg border border-[#dadce0] bg-white shadow-sm overflow-hidden">
+                {/* Blue header like captcha */}
+                <div className="bg-[#4285f4] px-3 py-2">
+                  <h3 className="text-white font-medium text-sm">ATTENTION: Watch the video until the end</h3>
+                  <p className="text-blue-100 text-[10px] mt-0.5">Understand how to withdraw your available balance</p>
+                </div>
+
+                {/* Stats bar */}
+                <div className="flex items-center justify-center gap-4 text-[10px] py-2 border-b border-gray-100 bg-gray-50">
                   <div className="flex items-center gap-1 text-gray-500">
                     <Eye className="w-3 h-3 text-[#4285f4]" />
                     <span>6M views</span>
@@ -189,112 +131,117 @@ export default function FinalPage() {
                     </span>
                   </div>
                 </div>
-              </div>
 
-              {/* VTurb Video Container */}
-              <div className="bg-black aspect-video relative" ref={vturbContainerRef}>
-                <div 
-                  id="vturb-player"
-                  className="w-full h-full"
-                  suppressHydrationWarning
-                  dangerouslySetInnerHTML={{
-                    __html: `<vturb-smartplayer id="vid-67422dad6fbe5b000bdb1ab0" style="display:block;width:100%;height:100%;"></vturb-smartplayer>`
-                  }}
-                />
-              </div>
+                {/* VTurb Video */}
+                <div className="bg-black aspect-video">
+                  <div 
+                    id="vturb-player"
+                    className="w-full h-full"
+                    suppressHydrationWarning
+                    dangerouslySetInnerHTML={{
+                      __html: `<vturb-smartplayer id="vid-67422dad6fbe5b000bdb1ab0" style="display:block;width:100%;height:100%;"></vturb-smartplayer>`
+                    }}
+                  />
+                </div>
 
-              {/* Sound notice */}
-              <div className="flex items-center justify-center gap-1.5 py-2 bg-white text-xs text-gray-600">
-                <Volume2 className="h-3.5 w-3.5 text-gray-500" />
-                <span>Make sure your sound is on</span>
+                {/* Sound notice */}
+                <div className="flex items-center justify-center gap-1.5 py-2 bg-white text-xs text-gray-600">
+                  <Volume2 className="h-3.5 w-3.5 text-gray-500" />
+                  <span>Make sure your sound is on</span>
+                </div>
               </div>
             </div>
 
-            {/* Comments Card */}
-            <div 
-              className={`bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-[0_2px_8px_rgba(0,0,0,0.08)] transition-all duration-500 delay-150 ${showContent ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}
-            >
-              {/* Header */}
-              <div className="px-3 py-2.5 flex items-center justify-between border-b border-gray-100">
+            {/* Comments Card - EXACT captcha style */}
+            <div className="bg-[#f8f9fa] rounded-2xl border border-[#dadce0] p-3 flex flex-col gap-2.5 shadow-[0_1px_3px_rgba(0,0,0,0.08),0_4px_12px_rgba(0,0,0,0.04)]">
+              {/* Comments header */}
+              <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
-                  <FacebookIcon />
-                  <span className="font-bold text-gray-900 text-sm">Comments</span>
+                  <svg viewBox="0 0 36 36" className="w-5 h-5 flex-shrink-0">
+                    <path fill="#1877F2" d="M36 18C36 8.059 27.941 0 18 0S0 8.059 0 18c0 8.985 6.584 16.43 15.188 17.779V23.203h-4.57V18h4.57v-3.962c0-4.513 2.688-7.006 6.802-7.006 1.97 0 4.031.352 4.031.352v4.43h-2.271c-2.237 0-2.933 1.388-2.933 2.813V18h4.992l-.798 5.203h-4.194v12.576C29.416 34.43 36 26.985 36 18z"/>
+                    <path fill="#fff" d="M25.003 23.203L25.801 18h-4.992v-3.373c0-1.425.696-2.813 2.933-2.813h2.271v-4.43s-2.061-.352-4.031-.352c-4.114 0-6.802 2.493-6.802 7.006V18h-4.57v5.203h4.57v12.576a18.15 18.15 0 005.624 0V23.203h4.199z"/>
+                  </svg>
+                  <span className="font-bold text-[#202124] text-sm">Comments</span>
                 </div>
-                <span className="text-xs text-gray-500">1,847 comments</span>
+                <span className="text-xs text-[#5f6368]">1,847 comments</span>
               </div>
 
-              {/* Comment list */}
-              <div className="px-3 py-2 flex flex-col">
-                {visibleComments.map((comment) => (
-                  <div
-                    key={comment.id}
-                    className="flex gap-2 py-2 border-b border-gray-50 last:border-b-0"
-                  >
-                    <img
-                      src={comment.avatar}
-                      alt=""
-                      className="w-8 h-8 rounded-full object-cover flex-shrink-0"
-                      loading="lazy"
-                    />
-                    <div className="flex-1 min-w-0">
-                      <div className="bg-[#f2f3f5] rounded-xl px-2.5 py-2">
-                        <p className="text-xs font-bold text-gray-900 leading-tight">{comment.name}</p>
-                        <p className="text-xs text-gray-700 leading-snug mt-0.5">{comment.text}</p>
-                      </div>
-                      <div className="flex items-center gap-2 mt-1 px-1">
-                        <button className="text-[10px] text-gray-500 hover:text-gray-800 font-semibold">Like</button>
-                        <button className="text-[10px] text-gray-500 hover:text-gray-800 font-semibold">Reply</button>
-                        <span className="text-[10px] text-gray-400">{comment.time}</span>
-                        <button
-                          onClick={() => toggleLike(comment.id)}
-                          className="flex items-center gap-1 text-[10px] ml-auto"
-                        >
-                          <div className="w-4 h-4 rounded-full flex items-center justify-center bg-[#1877f2]">
-                            <svg viewBox="0 0 24 24" className="w-2.5 h-2.5 fill-white">
-                              <path d="M1 21h4V9H1v12zm22-11c0-1.1-.9-2-2-2h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L14.17 1 7.59 7.59C7.22 7.95 7 8.45 7 9v10c0 1.1.9 2 2 2h9c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73v-2z"/>
-                            </svg>
-                          </div>
-                          <span className="text-gray-600 font-medium">{comment.likes}</span>
-                        </button>
+              {/* Comments list in white box */}
+              <div className="rounded-lg border border-[#dadce0] bg-white shadow-sm overflow-hidden">
+                <div className="divide-y divide-gray-100">
+                  {visibleComments.map((comment) => (
+                    <div key={comment.id} className="flex gap-2 p-2.5">
+                      <img
+                        src={comment.avatar}
+                        alt=""
+                        className="w-8 h-8 rounded-full object-cover flex-shrink-0"
+                        loading="lazy"
+                      />
+                      <div className="flex-1 min-w-0">
+                        <div className="bg-[#f2f3f5] rounded-xl px-2.5 py-2">
+                          <p className="text-xs font-bold text-gray-900 leading-tight">{comment.name}</p>
+                          <p className="text-xs text-gray-700 leading-snug mt-0.5">{comment.text}</p>
+                        </div>
+                        <div className="flex items-center gap-2 mt-1 px-1">
+                          <button className="text-[10px] text-gray-500 font-semibold">Like</button>
+                          <button className="text-[10px] text-gray-500 font-semibold">Reply</button>
+                          <span className="text-[10px] text-gray-400">{comment.time}</span>
+                          <button
+                            onClick={() => toggleLike(comment.id)}
+                            className="flex items-center gap-1 text-[10px] ml-auto"
+                          >
+                            <div className="w-4 h-4 rounded-full flex items-center justify-center bg-[#1877f2]">
+                              <svg viewBox="0 0 24 24" className="w-2.5 h-2.5 fill-white">
+                                <path d="M1 21h4V9H1v12zm22-11c0-1.1-.9-2-2-2h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L14.17 1 7.59 7.59C7.22 7.95 7 8.45 7 9v10c0 1.1.9 2 2 2h9c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73v-2z"/>
+                              </svg>
+                            </div>
+                            <span className="text-gray-600 font-medium">{comment.likes}</span>
+                          </button>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                ))}
-              </div>
-
-              {/* View more */}
-              {visibleCommentsCount < comments.length && (
-                <div className="px-3 pb-2 border-t border-gray-100 pt-2">
-                  <button
-                    onClick={loadMoreComments}
-                    className="w-full text-center text-xs text-[#1877f2] font-semibold py-1.5 flex items-center justify-center gap-1"
-                  >
-                    View more comments...
-                    <svg viewBox="0 0 24 24" className="w-3.5 h-3.5 fill-[#1877f2]">
-                      <path d="M7 10l5 5 5-5z"/>
-                    </svg>
-                  </button>
+                  ))}
                 </div>
-              )}
+
+                {/* View more */}
+                {visibleCommentsCount < comments.length && (
+                  <div className="border-t border-gray-100 p-2">
+                    <button
+                      onClick={loadMoreComments}
+                      className="w-full text-center text-xs text-[#1877f2] font-semibold py-1 flex items-center justify-center gap-1"
+                    >
+                      View more comments...
+                      <svg viewBox="0 0 24 24" className="w-3.5 h-3.5 fill-[#1877f2]">
+                        <path d="M7 10l5 5 5-5z"/>
+                      </svg>
+                    </button>
+                  </div>
+                )}
+              </div>
             </div>
 
             {/* Footer */}
-            <footer className="text-center py-3">
+            <div className="text-center text-xs text-gray-400 py-2">
               <div className="flex items-center justify-center gap-1.5 mb-1">
-                <GoogleIcon className="h-4 w-4" />
-                <span className="text-xs text-gray-400">2026 Google Rewards</span>
+                <svg viewBox="0 0 24 24" className="h-3.5 w-3.5">
+                  <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                  <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                  <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+                  <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+                </svg>
+                <span>© 2026 Google Rewards</span>
               </div>
-              <div className="flex items-center justify-center gap-2">
-                <a href="#" className="text-[10px] text-gray-400 underline">Privacy Policy</a>
-                <span className="text-[10px] text-gray-400">|</span>
-                <a href="#" className="text-[10px] text-gray-400 underline">Terms of use</a>
+              <div className="flex justify-center gap-2">
+                <a href="#" className="hover:text-gray-600">Privacy Policy</a>
+                <span>|</span>
+                <a href="#" className="hover:text-gray-600">Terms of use</a>
               </div>
-            </footer>
+            </div>
           </section>
         </div>
       </main>
 
-      {/* Bottom nav bar */}
+      {/* Bottom nav bar - responsive */}
       <div className="bg-white border-t border-[#dadce0] sticky bottom-0 z-40 px-3 pt-2 pb-[max(0.5rem,env(safe-area-inset-bottom))] shadow-[0_-2px_8px_rgba(0,0,0,0.04)]">
         <div className="relative mx-4 mb-2">
           <div className="absolute top-[11px] left-0 right-0 h-[3px] bg-[#e8eaed] rounded-full" />
