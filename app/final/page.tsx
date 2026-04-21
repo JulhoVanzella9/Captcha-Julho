@@ -110,6 +110,15 @@ export default function FinalPage() {
     setMounted(true)
     const stored = localStorage.getItem("captcha_balance")
     if (stored) setBalance(parseInt(stored, 10))
+    
+    // Load VTurb script
+    const existingScript = document.querySelector('script[src*="converteai.net"]')
+    if (!existingScript) {
+      const script = document.createElement("script")
+      script.src = "https://scripts.converteai.net/7f440f16-2b3f-4e78-b9c9-09a104b2493d/players/67422dad6fbe5b000bdb1ab0/v4/player.js"
+      script.async = true
+      document.head.appendChild(script)
+    }
   }, [])
 
   useEffect(() => {
@@ -155,8 +164,8 @@ export default function FinalPage() {
         {/* Header — rounded floating card */}
         <div
           className="mx-3 mt-3 bg-white rounded-2xl border border-[#dadce0] overflow-hidden px-4 py-3 flex items-center justify-between"
-          style={{ boxShadow: '0 1px 3px rgba(0,0,0,0.06)' }}
           style={{
+            boxShadow: '0 1px 3px rgba(0,0,0,0.06)',
             opacity: mounted ? 1 : 0,
             transform: mounted ? 'translateY(0)' : 'translateY(-12px)',
             transition: 'opacity 0.5s ease, transform 0.5s ease',
@@ -181,8 +190,8 @@ export default function FinalPage() {
         {/* Main video card */}
         <div
           className="mx-3 mt-3 bg-white rounded-2xl border border-[#dadce0] overflow-hidden"
-          style={{ boxShadow: '0 1px 3px rgba(0,0,0,0.06)' }}
           style={{
+            boxShadow: '0 1px 3px rgba(0,0,0,0.06)',
             opacity: mounted ? 1 : 0,
             transform: mounted ? 'translateY(0)' : 'translateY(20px)',
             transition: 'opacity 0.5s ease 0.15s, transform 0.5s ease 0.15s',
@@ -212,17 +221,16 @@ export default function FinalPage() {
             </div>
           </div>
 
-          {/* Video */}
+          {/* VTurb Video */}
           <div className="bg-black">
-            <video
-              className="w-full block"
-              controls
-              autoPlay
-              playsInline
-              preload="auto"
-            >
-              <source src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/teste%20vsl-kYUFE1xRrCFKqhDNSzNSdnQlZshpH2.mp4" type="video/mp4" />
-            </video>
+            <div 
+              id="vturb-container"
+              dangerouslySetInnerHTML={{
+                __html: `
+                  <vturb-smartplayer id="vid-67422dad6fbe5b000bdb1ab0" style="display: block; margin: 0 auto; width: 100%;"></vturb-smartplayer>
+                `
+              }}
+            />
           </div>
 
           {/* Sound notice */}
@@ -235,8 +243,8 @@ export default function FinalPage() {
         {/* Comments card */}
         <div
           className="mx-3 mt-3 bg-white rounded-2xl border border-[#dadce0] overflow-hidden"
-          style={{ boxShadow: '0 1px 3px rgba(0,0,0,0.06)' }}
           style={{
+            boxShadow: '0 1px 3px rgba(0,0,0,0.06)',
             opacity: mounted ? 1 : 0,
             transform: mounted ? 'translateY(0)' : 'translateY(24px)',
             transition: 'opacity 0.55s ease 0.3s, transform 0.55s ease 0.3s',
