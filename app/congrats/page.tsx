@@ -47,8 +47,8 @@ export default function CongratsPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#f1f3f4] flex flex-col">
-      <main className="flex flex-col w-full max-w-md mx-auto px-4 py-4 flex-1">
+    <div className="min-h-screen min-h-[100dvh] bg-[#f1f3f4] flex flex-col">
+      <main className="flex flex-col w-full max-w-md mx-auto px-3 py-3 flex-1">
         <div className="animate-page-enter">
           <section className="flex flex-col bg-white -mx-4 -mt-4 px-4 pt-4 pb-4">
             <Confetti trigger={showContent} />
@@ -159,38 +159,38 @@ export default function CongratsPage() {
         </div>
       </main>
 
-      {/* Bottom nav bar */}
-      <div className="bg-white border-t border-[#dadce0] sticky bottom-0 z-40 px-4 pt-3 pb-2 shadow-[0_-2px_8px_rgba(0,0,0,0.04)]">
-        <div className="relative mx-8 mb-3">
-          <div className="absolute top-[13px] left-0 right-0 h-[3px] bg-[#e8eaed] rounded-full" />
-          <div className="absolute top-[13px] left-0 h-[3px] bg-gradient-to-r from-[#4285f4] to-[#4285f4] rounded-full transition-all duration-1000 ease-[cubic-bezier(0.4,0,0.2,1)]" style={{ width: "80%" }} />
+      {/* Bottom nav bar - responsive */}
+      <div className="bg-white border-t border-[#dadce0] sticky bottom-0 z-40 px-3 pt-2 pb-[max(0.5rem,env(safe-area-inset-bottom))] shadow-[0_-2px_8px_rgba(0,0,0,0.04)]">
+        <div className="relative mx-4 mb-2">
+          <div className="absolute top-[11px] left-0 right-0 h-[3px] bg-[#e8eaed] rounded-full" />
+          <div className="absolute top-[11px] left-0 h-[3px] bg-gradient-to-r from-[#4285f4] to-[#4285f4] rounded-full transition-all duration-1000 ease-[cubic-bezier(0.4,0,0.2,1)]" style={{ width: "80%" }} />
 
           <div className="relative flex items-center justify-between">
-            <div className="flex flex-col items-center gap-1">
-              <div className="w-[26px] h-[26px] rounded-full flex items-center justify-center transition-all duration-500 ease-out bg-[#34a853] shadow-[0_0_0_3px_rgba(52,168,83,0.15)]">
-                <svg className="w-3.5 h-3.5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
+            <div className="flex flex-col items-center gap-0.5">
+              <div className="w-[22px] h-[22px] rounded-full flex items-center justify-center transition-all duration-500 ease-out bg-[#34a853] shadow-[0_0_0_2px_rgba(52,168,83,0.15)]">
+                <svg className="w-3 h-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                 </svg>
               </div>
-              <span className="text-[10px] font-semibold transition-colors duration-300 text-[#34a853]">Home</span>
+              <span className="text-[9px] font-semibold transition-colors duration-300 text-[#34a853]">Home</span>
             </div>
 
-            <div className="flex flex-col items-center gap-1">
-              <div className="w-[26px] h-[26px] rounded-full flex items-center justify-center transition-all duration-500 ease-out bg-[#34a853] shadow-[0_0_0_3px_rgba(52,168,83,0.15)]">
-                <svg className="w-3.5 h-3.5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
+            <div className="flex flex-col items-center gap-0.5">
+              <div className="w-[22px] h-[22px] rounded-full flex items-center justify-center transition-all duration-500 ease-out bg-[#34a853] shadow-[0_0_0_2px_rgba(52,168,83,0.15)]">
+                <svg className="w-3 h-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                 </svg>
               </div>
-              <span className="text-[10px] font-semibold transition-colors duration-300 text-[#34a853]">Tasks</span>
+              <span className="text-[9px] font-semibold transition-colors duration-300 text-[#34a853]">Tasks</span>
             </div>
 
-            <div className="flex flex-col items-center gap-1">
-              <div className="w-[26px] h-[26px] rounded-full flex items-center justify-center transition-all duration-500 ease-out bg-[#4285f4] shadow-[0_0_0_3px_rgba(66,133,244,0.2)]">
-                <svg className="w-3.5 h-3.5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+            <div className="flex flex-col items-center gap-0.5">
+              <div className="w-[22px] h-[22px] rounded-full flex items-center justify-center transition-all duration-500 ease-out bg-[#4285f4] shadow-[0_0_0_2px_rgba(66,133,244,0.2)]">
+                <svg className="w-3 h-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
               </div>
-              <span className="text-[10px] font-semibold transition-colors duration-300 text-[#4285f4]">Rewards</span>
+              <span className="text-[9px] font-semibold transition-colors duration-300 text-[#4285f4]">Rewards</span>
             </div>
           </div>
         </div>
