@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
+import Script from "next/script"
 import { Volume2, Eye, Clock } from "lucide-react"
 import { AnimatedBalance } from "@/components/flow/animated-balance"
 
@@ -105,30 +106,34 @@ export default function FinalPage() {
   const [visibleCommentsCount, setVisibleCommentsCount] = useState(5)
   const [comments, setComments] = useState(allComments)
   const [mounted, setMounted] = useState(false)
+  const [videoLoaded, setVideoLoaded] = useState(false)
 
   useEffect(() => {
     setMounted(true)
     const stored = localStorage.getItem("captcha_balance")
     if (stored) setBalance(parseInt(stored, 10))
+    
+    // Check if VTurb player loaded after a delay
+    const checkInterval = setInterval(() => {
+      const player = document.querySelector('vturb-smartplayer')
+      if (player && player.shadowRoot) {
+        setVideoLoaded(true)
+        clearInterval(checkInterval)
+      }
+    }, 500)
+    
+    // Timeout after 10 seconds
+    const timeout = setTimeout(() => {
+      clearInterval(checkInterval)
+    }, 10000)
+    
+    return () => {
+      clearInterval(checkInterval)
+      clearTimeout(timeout)
+    }
   }, [])
 
-  // Load VTurb script after component mounts
-  useEffect(() => {
-    if (!mounted) return
-    
-    // Small delay to ensure DOM is ready
-    const timer = setTimeout(() => {
-      const existingScript = document.querySelector('script[src*="converteai.net"]')
-      if (!existingScript) {
-        const script = document.createElement("script")
-        script.src = "https://scripts.converteai.net/7f440f16-2b3f-4e78-b9c9-09a104b2493d/players/67422dad6fbe5b000bdb1ab0/v4/player.js"
-        script.async = true
-        document.head.appendChild(script)
-      }
-    }, 100)
-    
-    return () => clearTimeout(timer)
-  }, [mounted])
+
 
   useEffect(() => {
     window.history.pushState(null, "", window.location.href)
@@ -229,15 +234,28 @@ export default function FinalPage() {
           </div>
 
           {/* VTurb Video */}
-          <div className="bg-black aspect-video relative">
-            {mounted && (
-              <div 
-                id="vturb-container"
-                className="absolute inset-0"
-                dangerouslySetInnerHTML={{
-                  __html: `<vturb-smartplayer id="vid-67422dad6fbe5b000bdb1ab0" style="display: block; margin: 0 auto; width: 100%; height: 100%;"></vturb-smartplayer>`
-                }}
-              />
+          <div className="bg-black aspect-video relative overflow-hidden">
+            {/* VTurb Player - requires domain to be whitelisted in VTurb dashboard */}
+            <div 
+              id="vturb-player-container"
+              className="w-full h-full absolute inset-0 z-10"
+              suppressHydrationWarning
+              dangerouslySetInnerHTML={{
+                __html: `<vturb-smartplayer id="vid-67422dad6fbe5b000bdb1ab0" style="display:block;width:100%;height:100%;"></vturb-smartplayer>`
+              }}
+            />
+            <Script 
+              src="https://scripts.converteai.net/7f440f16-2b3f-4e78-b9c9-09a104b2493d/players/67422dad6fbe5b000bdb1ab0/v4/player.js"
+              strategy="afterInteractive"
+            />
+            {/* Fallback loading state - shows until VTurb loads */}
+            {!videoLoaded && (
+              <div className="absolute inset-0 flex items-center justify-center bg-gray-900 z-0">
+                <div className="text-center text-white px-4">
+                  <div className="animate-spin w-8 h-8 border-2 border-white border-t-transparent rounded-full mx-auto mb-3"></div>
+                  <p className="text-xs text-gray-400">Loading video...</p>
+                </div>
+              </div>
             )}
           </div>
 
