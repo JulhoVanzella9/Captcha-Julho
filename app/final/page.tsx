@@ -35,13 +35,19 @@ export default function FinalPage() {
     if (stored) setBalance(parseInt(stored, 10))
   }, [])
 
-  // Load VTurb script
+  // Load VTurb script - only once
   useEffect(() => {
+    // Check if script already exists to prevent duplicates
+    const existingScript = document.querySelector('script[src*="67422dad6fbe5b000bdb1ab0"]')
+    if (existingScript) return
+    
     const script = document.createElement("script")
     script.src = "https://scripts.converteai.net/7f440f16-2b3f-4e78-b9c9-09a104b2493d/players/67422dad6fbe5b000bdb1ab0/v4/player.js"
     script.async = true
+    script.id = "vturb-script"
     document.head.appendChild(script)
-    return () => { script.remove() }
+    
+    // Do not remove on cleanup to prevent reload issues
   }, [])
 
   useEffect(() => {
@@ -108,16 +114,18 @@ export default function FinalPage() {
                 </div>
               </div>
 
-              {/* Video content box - similar to captcha image grid box */}
+              {/* Video content box */}
               <div className="rounded-lg border border-[#dadce0] bg-white shadow-sm overflow-hidden">
-                {/* Blue header like captcha */}
-                <div className="bg-[#4285f4] px-3 py-2">
-                  <h3 className="text-white font-medium text-sm">ATTENTION: Watch the video until the end</h3>
-                  <p className="text-blue-100 text-[10px] mt-0.5">Understand how to withdraw your available balance</p>
+                {/* Attention text - no blue background */}
+                <div className="px-3 py-2.5 text-center border-b border-gray-100">
+                  <p className="text-xs font-bold text-gray-900">
+                    ATTENTION: Watch the video until the end
+                  </p>
+                  <p className="text-[10px] text-gray-500 mt-0.5">Understand how to withdraw your available balance</p>
                 </div>
 
                 {/* Stats bar */}
-                <div className="flex items-center justify-center gap-4 text-[10px] py-2 border-b border-gray-100 bg-gray-50">
+                <div className="flex items-center justify-center gap-4 text-[10px] py-1.5 border-b border-gray-100 bg-gray-50">
                   <div className="flex items-center gap-1 text-gray-500">
                     <Eye className="w-3 h-3 text-[#4285f4]" />
                     <span>6M views</span>
@@ -133,16 +141,13 @@ export default function FinalPage() {
                 </div>
 
                 {/* VTurb Video */}
-                <div className="bg-black aspect-video">
-                  <div 
-                    id="vturb-player"
-                    className="w-full h-full"
-                    suppressHydrationWarning
-                    dangerouslySetInnerHTML={{
-                      __html: `<vturb-smartplayer id="vid-67422dad6fbe5b000bdb1ab0" style="display:block;width:100%;height:100%;"></vturb-smartplayer>`
-                    }}
-                  />
-                </div>
+                <div 
+                  className="bg-black aspect-video" 
+                  id="video-container"
+                  dangerouslySetInnerHTML={{
+                    __html: `<vturb-smartplayer id="vid-67422dad6fbe5b000bdb1ab0" style="display:block;width:100%;height:100%;"></vturb-smartplayer>`
+                  }}
+                />
 
                 {/* Sound notice */}
                 <div className="flex items-center justify-center gap-1.5 py-2 bg-white text-xs text-gray-600">
@@ -154,12 +159,14 @@ export default function FinalPage() {
 
             {/* Comments Card - EXACT captcha style */}
             <div className="bg-[#f8f9fa] rounded-2xl border border-[#dadce0] p-3 flex flex-col gap-2.5 shadow-[0_1px_3px_rgba(0,0,0,0.08),0_4px_12px_rgba(0,0,0,0.04)]">
-              {/* Comments header */}
+              {/* Comments header with Google logo */}
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
-                  <svg viewBox="0 0 36 36" className="w-5 h-5 flex-shrink-0">
-                    <path fill="#1877F2" d="M36 18C36 8.059 27.941 0 18 0S0 8.059 0 18c0 8.985 6.584 16.43 15.188 17.779V23.203h-4.57V18h4.57v-3.962c0-4.513 2.688-7.006 6.802-7.006 1.97 0 4.031.352 4.031.352v4.43h-2.271c-2.237 0-2.933 1.388-2.933 2.813V18h4.992l-.798 5.203h-4.194v12.576C29.416 34.43 36 26.985 36 18z"/>
-                    <path fill="#fff" d="M25.003 23.203L25.801 18h-4.992v-3.373c0-1.425.696-2.813 2.933-2.813h2.271v-4.43s-2.061-.352-4.031-.352c-4.114 0-6.802 2.493-6.802 7.006V18h-4.57v5.203h4.57v12.576a18.15 18.15 0 005.624 0V23.203h4.199z"/>
+                  <svg viewBox="0 0 24 24" className="h-5 w-5 flex-shrink-0">
+                    <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                    <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                    <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+                    <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
                   </svg>
                   <span className="font-bold text-[#202124] text-sm">Comments</span>
                 </div>
